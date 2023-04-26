@@ -31,5 +31,7 @@ public class Roles {
 
     @OneToMany(mappedBy = "roles", cascade = CascadeType.ALL)
     private List<Users> users;
+    
+    private static final long serialVersionUID = 1L;
 
 }

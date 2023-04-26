@@ -32,4 +32,6 @@ public class Permissions {
             joinColumns = @JoinColumn(name = "permission_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Roles> roles = new HashSet<>();
+
+    private static final long serialVersionUID = 1L;
 }
