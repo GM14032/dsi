@@ -38,4 +38,6 @@ public class Users {
     public void  prePersist() {
         createAt=new Date();
     }
+
+    private static final long serialVersionUID = 1L;
 }
