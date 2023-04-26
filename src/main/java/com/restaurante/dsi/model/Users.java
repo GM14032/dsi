@@ -18,7 +18,7 @@ public class Users {
     private String email;
     private String phone;
     @JsonProperty("user_name")
-    @Column(name = "user_name")
+    @Column(name = "user_name", unique = true)
     private String username;
     private String password;
     private boolean enable;
