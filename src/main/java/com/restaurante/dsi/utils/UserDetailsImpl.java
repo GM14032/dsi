@@ -14,8 +14,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.restaurante.dsi.model.Permissions;
-import com.restaurante.dsi.model.Users;
+import com.restaurante.dsi.model.Permission;
+import com.restaurante.dsi.model.User;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -50,10 +50,10 @@ public class UserDetailsImpl implements UserDetails {
     this.authorities = authorities;
   }
 
-  public static UserDetailsImpl build(Users user) {
-    Set<Permissions> permissions = new HashSet();
-    if (user.getRoles() != null) {
-      permissions = user.getRoles().getPermissions();
+  public static UserDetailsImpl build(User user) {
+    Set<Permission> permissions = new HashSet();
+    if (user.getRole() != null) {
+      permissions = user.getRole().getPermissions();
     }
     List<GrantedAuthority> authorities = permissions.stream()
         .map(permission -> new SimpleGrantedAuthority(permission.getName()))

@@ -1,16 +1,14 @@
 package com.restaurante.dsi.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.*;
 
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
-public class Permissions {
+public class Permission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,10 +18,10 @@ public class Permissions {
     private String description;
     private boolean enable;
 
-    @JsonProperty("create_at")
+
     @Column(name = "create_at")
     private Date createAt;
-    @JsonProperty("update_at")
+
     @Column(name = "update_at")
     private Date updateAt;
 
@@ -33,8 +31,8 @@ public class Permissions {
     }
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "permissions_roles", joinColumns = @JoinColumn(name = "permission_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Roles> roles = new HashSet<>();
+    @JoinTable(name = "permission_role", joinColumns = @JoinColumn(name = "permission_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> role = new HashSet<>();
 
     private static final long serialVersionUID = 1L;
 }

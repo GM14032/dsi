@@ -1,10 +1,9 @@
 package com.restaurante.dsi.repository;
 
-import com.restaurante.dsi.model.Users;
+import com.restaurante.dsi.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IUsers extends JpaRepository<Users, Long> {
-  public Users findByUsername(String username);
+public interface IRoleRepository extends JpaRepository<Role, Long> {
 }

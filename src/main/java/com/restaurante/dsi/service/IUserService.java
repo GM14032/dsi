@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.restaurante.dsi.model.Users;
+import com.restaurante.dsi.model.User;
 
 public interface IUserService {
-  public List<Users> findAll();
-
+  public List<User> findAll();
   public UserDetails loadUserByUsername(String username);
-
-  public Users save(Users user);
+  public User save(User user);
+  public User update(User user);
+  public User findById(Long id);
+  public void delete(Long id);
 }
