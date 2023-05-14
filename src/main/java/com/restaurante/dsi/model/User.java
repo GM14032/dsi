@@ -4,13 +4,14 @@ import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-
 import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Table(name = "users")
 @Entity @Setter @Getter @NoArgsConstructor
 public class User {
+
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,15 +26,15 @@ public class User {
     @NotBlank(message = "El teléfono es obligatorio")
     private String phone;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     @NotBlank(message = "El nombre de usuario es obligatorio")
     private String username;
     @NotBlank(message = "La contraseña es obligatoria")
     private String password;
-    private boolean enable;
+    @Column(columnDefinition = "boolean default true")
+    private Boolean enable=true;
     @Column(name = "create_at")
     private Date createAt;
-
     @Column(name = "update_at")
     private Date updateAt;
 
@@ -45,5 +46,9 @@ public class User {
     public void prePersist() {
         createAt = new Date();
     }
-    private static final long serialVersionUID = 1L;
+
+    @PreUpdate
+    public void preUpdate() {
+        updateAt = new Date();
+    }
 }

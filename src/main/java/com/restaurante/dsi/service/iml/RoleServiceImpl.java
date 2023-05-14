@@ -1,13 +1,17 @@
 package com.restaurante.dsi.service.iml;
 
+import com.restaurante.dsi.model.Permission;
 import com.restaurante.dsi.model.Role;
 import com.restaurante.dsi.repository.IRoleRepository;
 import com.restaurante.dsi.service.IRoleService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service("RoleService")
 public class RoleServiceImpl implements IRoleService {
@@ -19,17 +23,32 @@ public class RoleServiceImpl implements IRoleService {
     }
 
     @Override
+    @Transactional
     public Role save(Role role) {
         return roleRepository.save(role);
     }
 
     @Override
-    public Role update(Role role) {
-        return roleRepository.save(role);
+    @Transactional
+    public Role update(Role currentRole, Role role) {
+        if(role.getName()!=null){
+            currentRole.setName(role.getName());
+        }
+        if(role.getDescription()!=null){
+            currentRole.setDescription(role.getDescription());
+        }
+        if (role.getEnable() != null) {
+            currentRole.setEnable(role.getEnable());
+        }
+        if(role.getPermissions().size()>0){
+            currentRole.setPermissions(role.getPermissions());
+        }
+        return roleRepository.save(currentRole);
     }
 
     @Override
-    public Optional<Role> findById(Long id) {
-        return roleRepository.findById(id);
+    public Role findById(Long id) {
+
+        return roleRepository.findById(id).orElse(null);
     }
 }

@@ -2,8 +2,10 @@ package com.restaurante.dsi.controller;
 
 import java.util.List;
 
+import com.restaurante.dsi.middlewares.CustomExceptionHandler;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
@@ -27,15 +29,25 @@ public class UserRestController {
     user.setPassword(pass.encode(user.getPassword()));
     return userService.save(user);
   }
-  @PutMapping("/update")
-  public User update(@RequestBody @Valid User user) {
-    BCryptPasswordEncoder pass = new BCryptPasswordEncoder();
-    user.setPassword(pass.encode(user.getPassword()));
-        return userService.update(user);
+  @PutMapping("/update/{id}")
+  public User update(@PathVariable Long id, @RequestBody User user) {
+    if(user.getPassword()!=null){
+      BCryptPasswordEncoder pass = new BCryptPasswordEncoder();
+      user.setPassword(pass.encode(user.getPassword()));
+    }
+     User currUser=userService.findById(id);
+    return userService.update(currUser,user);
   }
   @GetMapping("/find/{id}")
-  public User findById(@PathVariable Long id) {
-        return userService.findById(id);
+  public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        User user = userService.findById(id);
+        if (user != null) {
+          return ResponseEntity.ok(user);
+        } else {
+          return ResponseEntity.notFound().build();
+        }
+
+
     }
   @DeleteMapping("/delete/{id}")
   public void delete(@PathVariable Long id) {

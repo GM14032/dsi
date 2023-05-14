@@ -1,6 +1,8 @@
 package com.restaurante.dsi.security;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.crypto.spec.SecretKeySpec;
 
@@ -26,10 +28,17 @@ public class JwtUtils {
 	public String generateJwtToken(Authentication authentication) {
 		UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 		SecretKeySpec secret_key = new SecretKeySpec(jwtSecret.getBytes(), "HmacSHA256");
+		Map<String, Object> claims = new HashMap<>();
+		claims.put("username", userPrincipal.getUsername());
+		claims.put("name", userPrincipal.getName());
+		claims.put("lastName", userPrincipal.getLastName());
+		claims.put("role", userPrincipal.getRole());
 
+		claims.put("permission", userPrincipal.getAuthorities().stream().map(item -> item.getAuthority()).toList());
 		return Jwts.builder()
 				.setSubject((userPrincipal.getUsername()))
 				.setIssuedAt(new Date())
+				.setClaims(claims)
 				.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
 				.signWith(secret_key)
 				.compact();

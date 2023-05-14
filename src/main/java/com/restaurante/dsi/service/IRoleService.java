@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface IRoleService {
     public List<Role> findAll();
     public Role save(Role role);
-    public Role update(Role role);
-    public Optional<Role> findById(Long id);
+    public Role update(Role currentRole,Role role);
+    public Role findById(Long id);
 }
