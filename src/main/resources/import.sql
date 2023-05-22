@@ -19,6 +19,6 @@ insert into permission_role (role_id, permission_id) values (1, 6);
 insert into permission_role (role_id, permission_id) values (1, 7);
 insert into permission_role (role_id, permission_id) values (2, 4);
 
-insert into users(name,last_name,email,phone,username, password, enable, role_id) values ('Jenniffer','Granados','test@gmail.com','7714-8798','admin', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 1);
-insert into users(name,last_name,email,phone,username, password, enable, role_id) values ('Freen','Bec','test2@gmail.com','7489-5478','FreenBecky', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 1);
+insert into users(name,last_name,email,phone,username, password, enable, role_id) values ('Jenniffer','Granados','test@gmail.com','(503) 7714-8798','admin', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 1);
+insert into users(name,last_name,email,phone,username, password, enable, role_id) values ('Jericho','Barrons','test2@gmail.com','(503) 7489-5478','barrons', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 1);
 

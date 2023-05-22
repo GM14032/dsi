@@ -2,7 +2,6 @@ package com.restaurante.dsi.service.iml;
 
 import java.util.List;
 import java.util.Optional;
-
 import com.restaurante.dsi.middlewares.CustomExceptionHandler;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -15,7 +14,6 @@ import com.restaurante.dsi.model.User;
 import com.restaurante.dsi.repository.IUserRepository;
 import com.restaurante.dsi.service.IUserService;
 import com.restaurante.dsi.utils.UserDetailsImpl;
-import org.springframework.data.jpa.repository.Query;
 
 @Service("UserService")
 public class UserServiceImpl implements IUserService, UserDetailsService {
@@ -48,31 +46,36 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 
   @Override
   public User update(User currentUser,User user) {
-    if( user.getName() != null ){
-      currentUser.setName(user.getName());
+    try {
+      if( user.getName() != null ){
+        currentUser.setName(user.getName());
+      }
+      if( user.getLastname() != null ){
+        currentUser.setLastname(user.getLastname());
+      }
+      if (user.getUsername() != null) {
+        currentUser.setUsername(user.getUsername());
+      }
+      if (user.getPassword() != null) {
+        currentUser.setPassword(user.getPassword());
+      }
+      if( user.getRole() != null ){
+        currentUser.setRole(user.getRole());
+      }
+      if (user.getEnable() != null) {
+        currentUser.setEnable(user.getEnable());
+      }
+      if(user.getPhone()!=null){
+        currentUser.setPhone(user.getPhone());
+      }
+      if(user.getEmail()!=null){
+        currentUser.setEmail(user.getEmail());
+      }
+      return usersRepository.save(currentUser);
+    } catch (DataIntegrityViolationException ex) {
+      throw new CustomExceptionHandler.DataIntegrityException("Ya existe un usuario con ese username.");
     }
-    if( user.getLastname() != null ){
-      currentUser.setLastname(user.getLastname());
-    }
-    if (user.getUsername() != null) {
-      currentUser.setUsername(user.getUsername());
-    }
-    if (user.getPassword() != null) {
-      currentUser.setPassword(user.getPassword());
-    }
-    if( user.getRole() != null ){
-      currentUser.setRole(user.getRole());
-    }
-    if (user.getEnable() != null) {
-      currentUser.setEnable(user.getEnable());
-    }
-    if(user.getPhone()!=null){
-      currentUser.setPhone(user.getPhone());
-    }
-    if(user.getEmail()!=null){
-      currentUser.setEmail(user.getEmail());
-    }
-    return usersRepository.save(currentUser);
+
   }
 
   @Override
