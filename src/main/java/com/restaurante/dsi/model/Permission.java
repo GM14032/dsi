@@ -23,23 +23,11 @@ public class Permission {
     private String description;
     @Column(name = "table_name")
     private String table;
-    @Column(columnDefinition = "boolean default true")
-    private boolean enable;
 
-    @Column(name = "create_at")
-    private Date createAt;
+    @Column(name = "group_id")
+    private String group;
 
-    @Column(name = "update_at")
-    private Date updateAt;
 
-    @PrePersist
-    public void prePersist() {
-        createAt = new Date();
-    }
 
-    @PreUpdate
-    public void preUpdate() {
-        updateAt = new Date();
-    }
 
 }

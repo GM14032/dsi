@@ -2,13 +2,13 @@
 insert into role ( name, enable) values ( 'Admin', true);
 insert into role (name, enable) values ('Chef', true);
 
-insert into permission (id, name,description,table_name, enable) values (1, 'READ_USER','Este permiso permite al usuario ver o leer información de la tabla usuario','USER', true);
-insert into permission (id, name,description,table_name, enable) values (2, 'WRITE_USER','Este permiso permite al usuario crear o modificar información en la tabla usuario','USER', true);
-insert into permission (id, name,description,table_name, enable) values (3, 'DELETE_USER','Este permiso permite al usuario eliminar información de la tabla usuario','USER', true);
-insert into permission (id, name,description,table_name, enable) values (4, 'READ_ROLE','Este permiso permite al usuario ver o leer información de la tabla rol','ROLE', true);
-insert into permission (id, name,description,table_name, enable) values (5, 'WRITE_ROLE','Este permiso permite al usuario crear o modificar información en la tabla rol','ROLE', true);
-insert into permission (id, name,description,table_name, enable) values (6, 'DELETE_ROLE','Este permiso permite al usuario eliminar información de la tabla rol','ROLE', true);
-insert into permission (id, name,description,table_name, enable) values (7, 'READ_PERMISSION','Este permiso permite al usuario ver o leer información de la tabla permiso','PERMISSION', true);
+insert into permission (id, name,description,table_name, group_id) values (1, 'READ_USER','Este permiso permite al usuario ver o leer información de la tabla usuario','Usuarios', 'READ');
+insert into permission (id, name,description,table_name, group_id) values (2, 'WRITE_USER','Este permiso permite al usuario crear o modificar información en la tabla usuario','Usuarios', 'WRITE');
+insert into permission (id, name,description,table_name, group_id) values (3, 'DELETE_USER','Este permiso permite al usuario eliminar información de la tabla usuario','Usuarios', 'DELETE');
+insert into permission (id, name,description,table_name, group_id) values (4, 'READ_ROLE','Este permiso permite al usuario ver o leer información de la tabla rol','Roles','READ');
+insert into permission (id, name,description,table_name, group_id) values (5, 'WRITE_ROLE','Este permiso permite al usuario crear o modificar información en la tabla rol','Roles', 'WRITE');
+insert into permission (id, name,description,table_name, group_id) values (6, 'DELETE_ROLE','Este permiso permite al usuario eliminar información de la tabla rol','Roles', 'DELETE');
+insert into permission (id, name,description,table_name, group_id) values (7, 'READ_PERMISSION','Este permiso permite al usuario ver o leer información de la tabla permiso','Permisos', 'READ');
 
 insert into permission_role (role_id, permission_id) values (1, 1);
 insert into permission_role (role_id, permission_id) values (1, 2);
