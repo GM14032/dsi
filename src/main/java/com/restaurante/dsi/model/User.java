@@ -38,6 +38,8 @@ public class User {
     @Column(name = "update_at")
     private Date updateAt;
 
+    @Column(columnDefinition = "boolean default false")
+    private  Boolean hasToken=false;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     @JsonIgnoreProperties({"users"})

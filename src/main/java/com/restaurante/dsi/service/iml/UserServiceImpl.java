@@ -80,7 +80,11 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 
   @Override
   public User findById(Long id) {
-    return usersRepository.findById(id).orElse(null)  ;
+    return usersRepository.findById(id).orElse(null);
+  }
+  @Override
+  public User findByEmail(String email) {
+    return usersRepository.findByEmail(email);
   }
 
   @Override

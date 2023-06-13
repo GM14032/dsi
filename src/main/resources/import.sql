@@ -9,6 +9,9 @@ insert into permission (id, name,description,table_name, group_id) values (4, 'R
 insert into permission (id, name,description,table_name, group_id) values (5, 'WRITE_ROLE','Este permiso permite al usuario crear o modificar información en la tabla rol','Roles', 'WRITE');
 insert into permission (id, name,description,table_name, group_id) values (6, 'DELETE_ROLE','Este permiso permite al usuario eliminar información de la tabla rol','Roles', 'DELETE');
 insert into permission (id, name,description,table_name, group_id) values (7, 'READ_PERMISSION','Este permiso permite al usuario ver o leer información de la tabla permiso','Permisos', 'READ');
+insert into permission (id, name,description,table_name, group_id) values (8, 'WRITE_ORDER','Este permiso permite al usuario  editar de la tabla Orden','Orden', 'WRITE');
+insert into permission (id, name,description,table_name, group_id) values (9, 'READ_ORDER','Este permiso permite al usuario ver o leer información de la tabla permiso','Permisos', 'READ');
+insert into permission (id, name,description,table_name, group_id) values (10, 'DELETE_ORDER','Este permiso permite al usuario eliminar información de la tabla permiso','Permisos', 'DELETE');
 
 insert into permission_role (role_id, permission_id) values (1, 1);
 insert into permission_role (role_id, permission_id) values (1, 2);
@@ -17,8 +20,13 @@ insert into permission_role (role_id, permission_id) values (1, 4);
 insert into permission_role (role_id, permission_id) values (1, 5);
 insert into permission_role (role_id, permission_id) values (1, 6);
 insert into permission_role (role_id, permission_id) values (1, 7);
+insert into permission_role (role_id, permission_id) values (1, 8);
+insert into permission_role (role_id, permission_id) values (1, 9);
+insert into permission_role (role_id, permission_id) values (1, 10);
 insert into permission_role (role_id, permission_id) values (2, 4);
 
-insert into users(name,last_name,email,phone,username, password, enable, role_id) values ('Jenniffer','Granados','test@gmail.com','(503) 7714-8798','admin', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 1);
+insert into users(name,last_name,email,phone,username, password, enable, role_id) values ('Jenniffer','Granados','fiebre.libros@gmail.com','(503) 7714-8798','admin', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 1);
 insert into users(name,last_name,email,phone,username, password, enable, role_id) values ('Jericho','Barrons','test2@gmail.com','(503) 7489-5478','barrons', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 1);
 
+INSERT INTO orders ( number_order, category, quantity, description, state, name)
+VALUES ( 1, 'Desayuno', 2, 'Huevos Revueltos con extra queso', 1, 'Huevos Revueltos');

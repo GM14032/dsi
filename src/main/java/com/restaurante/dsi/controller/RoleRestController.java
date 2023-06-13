@@ -2,6 +2,7 @@ package com.restaurante.dsi.controller;
 
 import com.restaurante.dsi.model.Permission;
 import com.restaurante.dsi.model.Role;
+import com.restaurante.dsi.model.User;
 import com.restaurante.dsi.service.IPermissionService;
 import com.restaurante.dsi.service.IRoleService;
 import jakarta.validation.Valid;
@@ -28,7 +29,7 @@ public class RoleRestController {
         return roleService.findAll();
     }
 
-    @PostMapping("/create")
+    @PostMapping("/")
     public Role createRole(@RequestBody @Valid Role role) {
         return roleService.save(role);
     }
@@ -41,7 +42,12 @@ public class RoleRestController {
         return roleService.update(roleToSaved,role);
     }
     @GetMapping("/{id}")
-    public Role getRoleById(@PathVariable Long id) {
-        return roleService.findById(id);
+    public ResponseEntity<Role>  getRoleById(@PathVariable Long id) {
+        Role role= roleService.findById(id);
+        if (role != null) {
+            return ResponseEntity.ok(role);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

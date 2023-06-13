@@ -12,5 +12,8 @@ public interface IUserService {
   public User save(User user);
   public User update(User currentUser,User user);
   public User findById(Long id);
+
   public void delete(Long id);
+
+  public User findByEmail(String email);
 }

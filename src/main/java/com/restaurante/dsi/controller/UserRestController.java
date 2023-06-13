@@ -23,13 +23,13 @@ public class UserRestController {
   public List<User> index() {
     return userService.findAll();
   }
-  @PostMapping("/register")
+  @PostMapping("/")
   public User register(@RequestBody @Valid User user) {
     BCryptPasswordEncoder pass = new BCryptPasswordEncoder();
     user.setPassword(pass.encode(user.getPassword()));
     return userService.save(user);
   }
-  @PutMapping("/update/{id}")
+  @PutMapping("/{id}")
   public User update(@PathVariable Long id, @RequestBody User user) {
     if(user.getPassword()!=null){
       BCryptPasswordEncoder pass = new BCryptPasswordEncoder();
@@ -38,7 +38,7 @@ public class UserRestController {
      User currUser=userService.findById(id);
     return userService.update(currUser,user);
   }
-  @GetMapping("/find/{id}")
+  @GetMapping("/{id}")
   public ResponseEntity<User> getUserById(@PathVariable Long id) {
         User user = userService.findById(id);
         if (user != null) {
@@ -49,10 +49,7 @@ public class UserRestController {
 
 
     }
-  @DeleteMapping("/delete/{id}")
-  public void delete(@PathVariable Long id) {
-        userService.delete(id);
-    }
+
   @GetMapping("/auth")
   @PreAuthorize("isAuthenticated()")
   public List<User> authorize() {
