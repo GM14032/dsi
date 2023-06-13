@@ -21,6 +21,7 @@ public class Order {
     private Long id;
 
     @Column(name = "number_order")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long numberOrder;
     // TODO: change for a foreign key of categories (desayuno, almuerzo, cena,
     // bebidas, etc)

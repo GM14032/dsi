@@ -40,8 +40,4 @@ INSERT INTO products (id, name, price) VALUES (3, 'Huevos con Chorizo', 5.00);
 INSERT INTO products (id, name, price) VALUES (4, 'Huevos con Jamon', 5.00);
 INSERT INTO products (id, name, price) VALUES (5, 'Huevos con Tocino', 5.00);
 INSERT INTO products (id, name, price) VALUES (6, 'Huevos con Salchicha', 5.00);
-
-INSERT INTO orders (id, number_order, category, quantity, description, state_id) VALUES (1, 1, 'Desayuno', 2, 'Huevos Revueltos con extra queso', 1);
-
-INSERT INTO order_details (id, order_id, product_id, total, quantity) VALUES (1, 1, 1, 10.00, 2);
-INSERT INTO order_details (id, order_id, product_id, total, quantity) VALUES (2, 1, 2, 10.00, 2);
+INSERT INTO products (id, name, price) VALUES (7, 'Pupusas de Queso', 0.50);
