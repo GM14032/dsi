@@ -33,7 +33,7 @@ public class Order {
     @JoinColumn(name = "state_id")
     private OrderStates state;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JsonIgnoreProperties({ "order" })
     private List<OrderDetails> orderDetails;
 
