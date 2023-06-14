@@ -30,5 +30,8 @@ public class OrderStates {
   @Column(unique = true)
   private String name;
 
+  @Column(name = "color_hex")
+  private String colorHex;
+
   private static final long serialVersionUID = 1L;
 }
