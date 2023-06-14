@@ -4,12 +4,16 @@ import com.restaurante.dsi.model.Order;
 import com.restaurante.dsi.model.Role;
 import com.restaurante.dsi.service.IOrderDetailService;
 import com.restaurante.dsi.service.IOrderService;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @CrossOrigin(origins = { "*" })
 @RestController
 @RequestMapping("/api/orders")
