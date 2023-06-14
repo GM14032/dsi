@@ -1,9 +1,11 @@
 package com.restaurante.dsi.controller;
 
 import com.restaurante.dsi.model.Order;
+import com.restaurante.dsi.model.Role;
 import com.restaurante.dsi.service.IOrderDetailService;
 import com.restaurante.dsi.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,8 +44,14 @@ public class OrderRestController {
     }
 
     @GetMapping("/{id}")
-    public Order getOrderById(@PathVariable Long id) {
-        return orderService.findById(id);
+    public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
+        Order order = orderService.findById(id);
+if (order != null) {
+            return ResponseEntity.ok(order);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
 }
