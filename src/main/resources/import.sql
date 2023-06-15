@@ -1,6 +1,7 @@
 
 insert into role ( name, enable) values ( 'Admin', true);
 insert into role (name, enable) values ('Chef', true);
+insert into role (name, enable) values ('Mesero', true);
 
 insert into permission (id, name,description,table_name, group_id) values (1, 'READ_USER','Este permiso permite al usuario ver o leer información de la tabla usuario','Usuarios', 'READ');
 insert into permission (id, name,description,table_name, group_id) values (2, 'WRITE_USER','Este permiso permite al usuario crear o modificar información en la tabla usuario','Usuarios', 'WRITE');
@@ -23,7 +24,10 @@ insert into permission_role (role_id, permission_id) values (1, 7);
 insert into permission_role (role_id, permission_id) values (1, 8);
 insert into permission_role (role_id, permission_id) values (1, 9);
 insert into permission_role (role_id, permission_id) values (1, 10);
-insert into permission_role (role_id, permission_id) values (2, 4);
+insert into permission_role (role_id, permission_id) values (2, 8);
+insert into permission_role (role_id, permission_id) values (2, 9);
+insert into permission_role (role_id, permission_id) values (3, 8);
+insert into permission_role (role_id, permission_id) values (3, 9);
 
 insert into users(name,last_name,email,phone,username, password, enable, role_id) values ('Jenniffer','Granados','fiebre.libros@gmail.com','(503) 7714-8798','admin', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 1);
 insert into users(name,last_name,email,phone,username, password, enable, role_id) values ('Jericho','Barrons','test2@gmail.com','(503) 7489-5478','barrons', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 1);
@@ -41,3 +45,5 @@ INSERT INTO products (id, name, price) VALUES (4, 'Huevos con Jamon', 5.00);
 INSERT INTO products (id, name, price) VALUES (5, 'Huevos con Tocino', 5.00);
 INSERT INTO products (id, name, price) VALUES (6, 'Huevos con Salchicha', 5.00);
 INSERT INTO products (id, name, price) VALUES (7, 'Pupusas de Queso', 0.50);
+
+INSERT INTO tables ( capacity, description) VALUES (2, 'Mesa numero 2');
