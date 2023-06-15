@@ -14,7 +14,7 @@ public class Tables {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String capacity;
+    private Long capacity;
     private String description;
     
     
