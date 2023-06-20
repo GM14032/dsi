@@ -13,8 +13,8 @@ insert into permission (id, name,description,table_name, group_id) values (7, 'R
 insert into permission (id, name,description,table_name, group_id) values (8, 'WRITE_ORDER','Este permiso permite al usuario  editar de la tabla Orden','Orden', 'WRITE');
 insert into permission (id, name,description,table_name, group_id) values (9, 'READ_ORDER','Este permiso permite al usuario ver o leer información de la tabla permiso','Permisos', 'READ');
 insert into permission (id, name,description,table_name, group_id) values (10, 'DELETE_ORDER','Este permiso permite al usuario eliminar información de la tabla permiso','Permisos', 'DELETE');
-insert into permission (id, name,description,table_name, group_id) values (11, 'READ_TablE','Este permiso permite al usuario ver o leer información de la tabla mesa','Table', 'READ');
-insert into permission (id, name,description,table_name, group_id) values (12, 'WRITE_TABLE','Este permiso permite al usuario crear y eliminar información de la tabla mesa','Table', 'WRITE');
+insert into permission (id, name,description,table_name, group_id) values (11, 'READ_TABLE','Este permiso permite al usuario ver o leer información de la tabla mesa','Mesas', 'READ');
+insert into permission (id, name,description,table_name, group_id) values (12, 'WRITE_TABLE','Este permiso permite al usuario crear y eliminar información de la tabla mesa','Mesas', 'WRITE');
 
 insert into permission_role (role_id, permission_id) values (1, 1);
 insert into permission_role (role_id, permission_id) values (1, 2);
