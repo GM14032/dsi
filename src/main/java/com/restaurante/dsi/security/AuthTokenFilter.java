@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.restaurante.dsi.service.iml.UserServiceImpl;
+import com.restaurante.dsi.service.impl.UserServiceImpl;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

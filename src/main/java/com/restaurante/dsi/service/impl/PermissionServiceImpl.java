@@ -1,4 +1,4 @@
-package com.restaurante.dsi.service.iml;
+package com.restaurante.dsi.service.impl;
 
 import com.restaurante.dsi.model.Permission;
 import com.restaurante.dsi.repository.IPermissionRepository;

@@ -1,7 +1,6 @@
-package com.restaurante.dsi.service.iml;
+package com.restaurante.dsi.service.impl;
 
 import com.restaurante.dsi.middlewares.CustomExceptionHandler;
-import com.restaurante.dsi.model.Permission;
 import com.restaurante.dsi.model.Role;
 import com.restaurante.dsi.repository.IRoleRepository;
 import com.restaurante.dsi.service.IRoleService;
@@ -10,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @Service("RoleService")
 public class RoleServiceImpl implements IRoleService {
