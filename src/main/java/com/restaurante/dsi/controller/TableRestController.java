@@ -29,11 +29,8 @@ public class TableRestController {
 @Autowired
 private ITableService tableService;
 @GetMapping("/")
-
  public List<Tables> listar(){
-
-    return tableService.findAll() ;
-
+    return tableService.findAll();
  }
   @PostMapping("/")
   public Tables create(@RequestBody @Valid Tables table) {
@@ -52,8 +49,6 @@ private ITableService tableService;
         } else {
           return ResponseEntity.notFound().build();
         }
-
-
     }
   @DeleteMapping("/{id}")
   public void delete(@PathVariable Long id) {
