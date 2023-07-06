@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.restaurante.dsi.utils.UserDetailsImpl;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
 @Component
@@ -45,8 +46,12 @@ public class JwtUtils {
 	}
 
 	public String getUserNameFromJwtToken(String token) {
-		return Jwts.parserBuilder().setSigningKey(jwtSecret.getBytes()).build().parseClaimsJws(token).getBody()
-				.getSubject();
+		Claims claims = Jwts.parserBuilder().setSigningKey(jwtSecret.getBytes()).build().parseClaimsJws(token).getBody();
+		String username = claims.get("username", String.class);
+		if (username == null) {
+			username = claims.getSubject();
+		}
+		return username;
 	}
 
 	public boolean validateJwtToken(String authToken) {
