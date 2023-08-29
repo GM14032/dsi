@@ -12,6 +12,5 @@ public interface   NotificationDTO {
     Boolean getStatus();
     @JsonProperty("user_id")
     Long getUserId();
-
-    String redirect();
+    String getRedirect();
 }
