@@ -27,6 +27,7 @@ public class MessageRestController {
     List<String> roles = message.getRoles();
     Map<String, String> map = new HashMap<>();
     map.put("message", message.getContent());
+    map.put("redirect", message.getRedirect());
     map.put("idNotification",message.getIdNotification().toString());
     for (String role : roles) {
       template.convertAndSend("/topic/message/" + role, map);
