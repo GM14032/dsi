@@ -9,6 +9,7 @@ import lombok.Setter;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity @Setter @Getter
+@Table(name = "user_notification")
 public class UserNotification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,5 +23,5 @@ public class UserNotification {
     @ManyToOne
     @JoinColumn(name = "notification_id")
     private Notification notification;
-    private Long status;
+    private Boolean status;
 }

@@ -34,8 +34,8 @@ insert into permission_role (role_id, permission_id) values (1, 11);
 insert into permission_role (role_id, permission_id) values (1, 12);
 
 insert into users(name,last_name,email,phone,username, password, enable, role_id) values ('Jenniffer','Granados','fiebre.libros@gmail.com','(503) 7714-8798','admin', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 1);
-insert into users(name,last_name,email,phone,username, password, enable, role_id) values ('Jericho','Barrons','test2@gmail.com','(503) 7489-5478','DSIJerichoBarrons', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 2);
-insert into users(name,last_name,email,phone,username, password, enable, role_id) values ('Jen','Lisa','jenlisa@gmail.com','(503) 7489-5478','DSIJenLisa', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 3);
+insert into users(name,last_name,email,phone,username, password, enable, role_id) values ('Ever','Bonilla','test2@gmail.com','(503) 7489-5478','Ever_Bonilla', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 2);
+insert into users(name,last_name,email,phone,username, password, enable, role_id) values ('Fatima','Gomez','jenlisa@gmail.com','(503) 7489-5478','Fatima_Gomez', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 3);
 
 INSERT INTO order_states (id, name, color_hex) VALUES (1, 'pendiente', '#FF0000');
 INSERT INTO order_states (id, name, color_hex) VALUES (2, 'preparando', '#FFA500');

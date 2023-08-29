@@ -5,9 +5,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
-
+import org.hibernate.annotations.GenerationTime;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Table(name = "orders")
@@ -23,7 +22,6 @@ public class Order {
     private Long id;
 
     @Column(name = "number_order")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long numberOrder;
     // TODO: change for a foreign key of categories (desayuno, almuerzo, cena,
     // bebidas, etc)
