@@ -3,12 +3,9 @@ package com.restaurante.dsi.model.businesslogic;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.restaurante.dsi.model.auth.Permission;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,7 +23,6 @@ public class Order {
     private Long id;
 
     @Column(name = "number_order")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long numberOrder;
     // TODO: change for a foreign key of categories (desayuno, almuerzo, cena,
     // bebidas, etc)
@@ -44,9 +40,10 @@ public class Order {
     private List<OrderDetail> orderDetails;
 
 
-    @OneToMany(mappedBy = "orders", fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "table_id")
     @JsonIgnoreProperties({"orders"})
-    private Set<DiningTable> tables = new HashSet<>();
+    private DiningTable table;
 
     private Double total = 0.0;
     @JsonProperty("create_at")

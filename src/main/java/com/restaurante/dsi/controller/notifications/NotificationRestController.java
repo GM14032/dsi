@@ -13,18 +13,18 @@ import java.util.List;
 @CrossOrigin(origins = { "*" })
 @RestController
 @RequestMapping("/api/notifications")
-@Tag(name = "Websocket", description = "Endpoints para el envio de msj de las notificaciones de la base de datos")
+@Tag(name = "Notificacion", description = "Endpoints para el envio de msj de las notificaciones de la base de datos")
 public class NotificationRestController {
     @Autowired
     private INotificationsService notificationsService;
 
     @Autowired
     private IUserService userService;
-    @GetMapping("/")
+    @GetMapping({"/",""})
     public List<Notification> index(){
         return notificationsService.findAll();
     }
-    @PostMapping("/")
+    @PostMapping({"/",""})
     public Notification save(@RequestBody Notification notifications){
         return notificationsService.save(notifications);
     }

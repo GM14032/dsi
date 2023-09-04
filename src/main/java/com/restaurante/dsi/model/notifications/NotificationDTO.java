@@ -9,7 +9,8 @@ public interface   NotificationDTO {
     String getMessage();
     @JsonProperty("create_at")
     Date getCreateAt();
-    Long getStatus();
+    Boolean getStatus();
     @JsonProperty("user_id")
     Long getUserId();
+    String getRedirect();
 }

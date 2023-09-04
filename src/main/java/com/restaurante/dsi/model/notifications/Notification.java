@@ -29,6 +29,7 @@ public class Notification {
     private Set<UserNotification> userNotifications;
 
     private List<String> roles;
+    private String redirect;
     @PrePersist
     public void prePersist() {
         createAt = new Date();

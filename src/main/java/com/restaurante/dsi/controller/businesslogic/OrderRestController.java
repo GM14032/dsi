@@ -1,9 +1,12 @@
 package com.restaurante.dsi.controller.businesslogic;
 
 import com.restaurante.dsi.model.businesslogic.Order;
+import com.restaurante.dsi.model.businesslogic.OrderState;
 import com.restaurante.dsi.service.businesslogic.IOrderDetailService;
 import com.restaurante.dsi.service.businesslogic.IOrderService;
+import com.restaurante.dsi.service.businesslogic.IOrderStateService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,7 +26,8 @@ public class OrderRestController {
 
     @Autowired
     private IOrderDetailService orderDetailService;
-
+@Autowired
+private IOrderStateService orderStateService;
     @GetMapping({ "/", "" })
     public List<Order> index(
             @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
@@ -42,12 +46,14 @@ public class OrderRestController {
         });
         newOrder.setOrderDetails(order.getOrderDetails());
         return newOrder;
+
     }
 
     @PutMapping("/{id}")
     public Order update(@PathVariable Long id, @RequestBody Order order) {
         Order currOrder = orderService.findById(id);
-        return orderService.update(currOrder, order);
+        Order orderUpdated =orderService.update(currOrder, order);
+        return orderUpdated;
     }
 
     @GetMapping("/{id}")

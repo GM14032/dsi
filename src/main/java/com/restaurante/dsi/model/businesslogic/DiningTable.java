@@ -1,11 +1,14 @@
 package com.restaurante.dsi.model.businesslogic;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.restaurante.dsi.model.auth.User;
 import lombok.*;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity @Setter @Getter @NoArgsConstructor
 @Table(name = "tables")
@@ -20,8 +23,7 @@ public class DiningTable {
     @Column(columnDefinition = "boolean default true")
     private Boolean available=true;
 
-    @ManyToOne
-    @JsonIgnoreProperties({"tables"})
-    private Order orders;
-
+    @OneToMany(mappedBy = "table", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<Order> orders = new HashSet<>();
 }
