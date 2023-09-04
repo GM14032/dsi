@@ -53,8 +53,6 @@ private IOrderStateService orderStateService;
     public Order update(@PathVariable Long id, @RequestBody Order order) {
         Order currOrder = orderService.findById(id);
         Order orderUpdated =orderService.update(currOrder, order);
-        OrderState state=orderStateService.findById(orderUpdated.getState().getId());
-        orderUpdated.setState(state);
         return orderUpdated;
     }
 
