@@ -20,6 +20,16 @@ DO $$
         END IF;
     END $$;
 
+DO $$BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM pg_trigger
+        WHERE tgname = 'update_table_create_order_trigger'
+    ) THEN
+DROP TRIGGER update_table_create_order_trigger ON tables;
+END IF;
+END$$;
+
 -- Crear la funcion
 
 CREATE OR REPLACE FUNCTION insert_user_notification_trigger()
@@ -58,6 +68,36 @@ BEGIN
     RETURN NEW;
     END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION update_table_create_order_trigger()
+RETURNS TRIGGER AS $$
+BEGIN
+UPDATE tables
+SET available = false
+WHERE id = NEW.table_id;
+
+RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION update_table_update_order_trigger()
+    RETURNS TRIGGER AS $$
+    DECLARE
+      state INT;
+    BEGIN
+
+  SELECT id INTO state FROM order_states WHERE name = 'completado';
+
+  IF NEW.state_id = state THEN
+
+    UPDATE tables
+    SET available = true
+    WHERE id = NEW.table_id;
+  END IF;
+  RETURN NEW;
+    END;
+$$ LANGUAGE plpgsql;
+
 -- crear trigger
 CREATE TRIGGER user_notification_insert_trigger
 AFTER INSERT ON notification
@@ -68,3 +108,14 @@ CREATE TRIGGER before_insert_order
     BEFORE INSERT ON orders
     FOR EACH ROW
 EXECUTE FUNCTION count_number_order_trigger();
+
+CREATE TRIGGER update_table_create_order_trigger
+    AFTER INSERT ON orders
+    FOR EACH ROW
+    EXECUTE FUNCTION update_table_create_order_trigger();
+
+CREATE TRIGGER update_table_update_order_trigger
+    AFTER UPDATE ON orders
+    FOR EACH ROW
+    WHEN (OLD.state_id IS DISTINCT FROM NEW.state_id)
+EXECUTE FUNCTION update_table_update_order_trigger();

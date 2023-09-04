@@ -1,7 +1,9 @@
 package com.restaurante.dsi.controller.businesslogic;
 
+import com.restaurante.dsi.model.businesslogic.DiningTable;
 import com.restaurante.dsi.model.businesslogic.Order;
 import com.restaurante.dsi.model.businesslogic.OrderState;
+import com.restaurante.dsi.service.businesslogic.IDiningTableService;
 import com.restaurante.dsi.service.businesslogic.IOrderDetailService;
 import com.restaurante.dsi.service.businesslogic.IOrderService;
 import com.restaurante.dsi.service.businesslogic.IOrderStateService;
@@ -26,8 +28,8 @@ public class OrderRestController {
 
     @Autowired
     private IOrderDetailService orderDetailService;
-@Autowired
-private IOrderStateService orderStateService;
+    @Autowired
+    private IDiningTableService tableService;
     @GetMapping({ "/", "" })
     public List<Order> index(
             @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
@@ -52,19 +54,16 @@ private IOrderStateService orderStateService;
     @PutMapping("/{id}")
     public Order update(@PathVariable Long id, @RequestBody Order order) {
         Order currOrder = orderService.findById(id);
-        Order orderUpdated =orderService.update(currOrder, order);
-        return orderUpdated;
+        return orderService.update(currOrder, order);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
         Order order = orderService.findById(id);
-if (order != null) {
+        if (order != null) {
             return ResponseEntity.ok(order);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-
+            } else {
+                return ResponseEntity.notFound().build();
+            }
     }
-
 }

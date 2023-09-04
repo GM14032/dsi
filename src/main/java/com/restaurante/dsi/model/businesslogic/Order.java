@@ -54,11 +54,11 @@ public class Order {
     private LocalDateTime updateAt;
     @PrePersist
     public void prePersist() {
-        createAt = LocalDateTime.now();
-    }
+        createAt = LocalDateTime.now();}
     @PreUpdate
     public void preUpdate() {
         updateAt = LocalDateTime.now();
     }
+
 
 }
