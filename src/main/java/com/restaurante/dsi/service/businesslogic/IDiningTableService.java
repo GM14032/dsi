@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IDiningTableService {
 
-  public List<DiningTable> findAll();
+  public List<DiningTable> findAll(Boolean available);
   public DiningTable save(DiningTable table);
   public DiningTable update(DiningTable currentTable, DiningTable table);
   public DiningTable findById(Long id);

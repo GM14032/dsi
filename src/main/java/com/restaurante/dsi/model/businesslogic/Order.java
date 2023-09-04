@@ -3,12 +3,15 @@ package com.restaurante.dsi.model.businesslogic;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.restaurante.dsi.model.auth.Permission;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Table(name = "orders")
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -40,9 +43,10 @@ public class Order {
     @JsonIgnoreProperties({ "order" })
     private List<OrderDetail> orderDetails;
 
-    // TODO: change for a foreign key of tables
-    @Column(name = "table_number", columnDefinition = "bigint default 0")
-    private Long tableNumber = 0L;
+
+    @OneToMany(mappedBy = "orders", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"orders"})
+    private Set<DiningTable> tables = new HashSet<>();
 
     private Double total = 0.0;
     @JsonProperty("create_at")

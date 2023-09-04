@@ -17,8 +17,8 @@ public class DiningTableRestController {
 @Autowired
 private IDiningTableService tableService;
 @GetMapping({ "/", "" })
- public List<DiningTable> listar(){
-    return tableService.findAll();
+ public List<DiningTable> listar(@RequestParam(required = false) Boolean available){
+    return tableService.findAll(available);
  }
   @PostMapping("/")
   public DiningTable create(@RequestBody @Valid DiningTable table) {

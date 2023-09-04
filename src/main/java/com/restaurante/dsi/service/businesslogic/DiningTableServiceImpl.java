@@ -16,8 +16,11 @@ public class DiningTableServiceImpl implements IDiningTableService {
   private IDiningTableRepository tableRepository;
 
   @Override
-  public List<DiningTable> findAll() {
-    return tableRepository.findAll();
+  public List<DiningTable> findAll(Boolean available) {
+      if(available!=null){
+          return tableRepository.findByAvailable(available);
+      }
+      return tableRepository.findAll();
   }
 
   @Override
@@ -37,6 +40,9 @@ public class DiningTableServiceImpl implements IDiningTableService {
             if(table.getDescription()!=null){
                 currentTable.setDescription(table.getDescription());
             }
+       if(table.getAvailable()!=null){
+           currentTable.setAvailable(table.getAvailable());
+       }
             return tableRepository.save(currentTable);
 
     }
