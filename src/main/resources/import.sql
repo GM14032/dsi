@@ -54,3 +54,13 @@ INSERT INTO products (id, name, price) VALUES (7, 'Pupusas de Queso', 0.50);
 INSERT INTO tables ( capacity, description) VALUES (2, 'Mesa numero 2');
 INSERT INTO tables ( capacity, description) VALUES (2, 'Mesa numero 2');
 
+INSERT INTO ingredient (name, is_countable) VALUES ('Harina', true);
+INSERT INTO ingredient (name, is_countable)VALUES ('Aceite de oliva', false);
+INSERT INTO ingredient (name, is_countable)VALUES ('Azúcar', true);
+INSERT INTO ingredient (name, is_countable)VALUES ('Sal', false);
+INSERT INTO ingredient (name, is_countable)VALUES ('Huevos', true);
+INSERT INTO ingredient (name, is_countable)VALUES ('Harina', true);
+INSERT INTO ingredient (name, is_countable)VALUES ('Tomates', true);
+INSERT INTO ingredient (name, is_countable)VALUES ('Carne de res', true);
+INSERT INTO ingredient (name, is_countable)VALUES ('Cebolla', true);
+INSERT INTO ingredient (name, is_countable)VALUES ('Pimienta', true);
