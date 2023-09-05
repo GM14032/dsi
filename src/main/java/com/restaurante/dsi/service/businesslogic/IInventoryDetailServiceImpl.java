@@ -36,12 +36,16 @@ public class IInventoryDetailServiceImpl implements IInventoryDetailService{
     }
 
     @Override
-    public InventoryDetail findById(Long id) {
-        return inventoryDetailRepository.findById(id).orElse(null);
+    public List<InventoryDetail> findByInventory(Long id) {
+        return inventoryDetailRepository.findByInventoryId(id);
     }
 
     @Override
+    public InventoryDetail findById(Long id) {
+        return inventoryDetailRepository.findById(id).orElse(null);
+    }
+    @Override
     public void delete(Long id) {
-
+        inventoryDetailRepository.deleteById(id);
     }
 }

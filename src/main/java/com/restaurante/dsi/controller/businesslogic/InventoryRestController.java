@@ -17,8 +17,8 @@ public class InventoryRestController {
     @Autowired
     private IInventoryService inventoryService;
     @GetMapping({ "/", "" })
-    public List<Inventory> getAll() {
-        return inventoryService.findAll();
+    public List<Inventory> getAll(@RequestParam(required = false) Boolean active) {
+        return inventoryService.findAll(active);
     }
     @PostMapping({ "/", "" })
     public Inventory register(@RequestBody Inventory inventory) {

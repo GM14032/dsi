@@ -28,8 +28,9 @@ public class OrderRestController {
 
     @Autowired
     private IOrderDetailService orderDetailService;
+
     @Autowired
-    private IDiningTableService tableService;
+    private IOrderStateService orderStateService;
     @GetMapping({ "/", "" })
     public List<Order> index(
             @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
@@ -41,12 +42,14 @@ public class OrderRestController {
     @PostMapping("/")
     public Order register(@RequestBody Order order) {
         Order newOrder = orderService.save(order);
+        OrderState orderState = orderStateService.findByName("Pendiente");
         // save each order detail
         order.getOrderDetails().forEach(orderDetail -> {
             orderDetail.setOrder(newOrder);
             orderDetailService.save(orderDetail);
         });
         newOrder.setOrderDetails(order.getOrderDetails());
+        newOrder.setState(orderState);
         return newOrder;
 
     }

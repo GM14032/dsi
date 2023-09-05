@@ -30,7 +30,12 @@ public class InventoryDetailRestController {
         return inventoryDetailService.update(currInventoryDetail, inventoryDetail);
     }
     @GetMapping("/{id}")
-    public InventoryDetail show(@PathVariable Long id) {
-        return inventoryDetailService.findById(id);
+    public List<InventoryDetail> show(@PathVariable Long id) {
+        return inventoryDetailService.findByInventory(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        inventoryDetailService.delete(id);
     }
 }

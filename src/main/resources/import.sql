@@ -39,11 +39,11 @@ insert into users(name,last_name,email,phone,username, password, enable, role_id
 insert into users(name,last_name,email,phone,username, password, enable, role_id) values ('Ever','Bonilla','test2@gmail.com','(503) 7489-5478','Ever_Bonilla', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 2);
 insert into users(name,last_name,email,phone,username, password, enable, role_id) values ('Fatima','Gomez','jenlisa@gmail.com','(503) 7489-5478','Fatima_Gomez', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 3);
 
-INSERT INTO order_states (id, name, color_hex) VALUES (1, 'pendiente', '#FF0000');
-INSERT INTO order_states (id, name, color_hex) VALUES (2, 'preparando', '#FFA500');
-INSERT INTO order_states (id, name, color_hex) VALUES (3, 'completado', '#008000');
-INSERT INTO order_states (id, name, color_hex) VALUES (4, 'entregado', '#0000FF');
-INSERT INTO order_states (id, name, color_hex) VALUES (5, 'cancelado', '#808080');
+INSERT INTO order_states (id, name, color_hex) VALUES (1, 'Pendiente', '#FF0000');
+INSERT INTO order_states (id, name, color_hex) VALUES (2, 'Preparando', '#FFA500');
+INSERT INTO order_states (id, name, color_hex) VALUES (3, 'Completado', '#008000');
+INSERT INTO order_states (id, name, color_hex) VALUES (4, 'Entregado', '#0000FF');
+INSERT INTO order_states (id, name, color_hex) VALUES (5, 'Cancelado', '#808080');
 
 INSERT INTO products (id, name, price) VALUES (1, 'Huevos Revueltos', 5.00);
 INSERT INTO products (id, name, price) VALUES (2, 'Huevos Rancheros', 5.00);
