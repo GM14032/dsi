@@ -19,7 +19,7 @@ public class IInventoryServiceImpl implements IInventoryService {
         if (active != null && active) {
             return inventoryRepository.findByIsActiveTrue();
         }
-        return inventoryRepository.findAll();
+        return inventoryRepository.findAllByOrderByIdDesc();
     }
 
     @Override

@@ -29,9 +29,9 @@ public class InventoryDetailRestController {
         InventoryDetail currInventoryDetail = inventoryDetailService.findById(id);
         return inventoryDetailService.update(currInventoryDetail, inventoryDetail);
     }
-    @GetMapping("/{id}")
-    public List<InventoryDetail> show(@PathVariable Long id) {
-        return inventoryDetailService.findByInventory(id);
+    @GetMapping("/{idInventory}")
+    public List<InventoryDetail> show(@PathVariable Long idInventory) {
+        return inventoryDetailService.findByInventory(idInventory);
     }
 
     @DeleteMapping("/{id}")

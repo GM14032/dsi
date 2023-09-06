@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface IInventoryRepository extends JpaRepository<Inventory,Long> {
     List<Inventory> findByIsActiveTrue();
+    List<Inventory> findAllByOrderByIdDesc();
 }

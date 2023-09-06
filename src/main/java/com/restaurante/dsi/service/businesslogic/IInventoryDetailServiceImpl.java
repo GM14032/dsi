@@ -37,7 +37,7 @@ public class IInventoryDetailServiceImpl implements IInventoryDetailService{
 
     @Override
     public List<InventoryDetail> findByInventory(Long id) {
-        return inventoryDetailRepository.findByInventoryId(id);
+        return inventoryDetailRepository.findByInventoryIdOrderByIdDesc(id);
     }
 
     @Override
