@@ -18,6 +18,7 @@ public class Ingredient {
     private String name;
     private Boolean isCountable;
     private String description;
+    private String unit;
 
     @Column(name = "create_at")
     private LocalDateTime createAt;

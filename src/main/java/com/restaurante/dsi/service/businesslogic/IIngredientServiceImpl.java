@@ -29,6 +29,12 @@ public class IIngredientServiceImpl implements IIngredientService{
         if (ingredient.getIsCountable() != null) {
             currentIngredient.setIsCountable(ingredient.getIsCountable());
         }
+        if (ingredient.getDescription() != null) {
+            currentIngredient.setDescription(ingredient.getDescription());
+        }
+        if (ingredient.getUnit() != null) {
+            currentIngredient.setUnit(ingredient.getUnit());
+        }
         return ingredientRepository.save(currentIngredient);
     }
 
