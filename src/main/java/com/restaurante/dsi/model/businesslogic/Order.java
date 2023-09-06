@@ -6,15 +6,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Table(name = "orders")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Entity
-@Setter
-@Getter
+@Entity @Setter @Getter
 @NoArgsConstructor
 public class Order {
     private static final long serialVersionUID = 1L;
