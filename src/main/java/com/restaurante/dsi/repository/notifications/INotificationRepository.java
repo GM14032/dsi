@@ -13,8 +13,8 @@ public interface INotificationRepository extends JpaRepository<Notification,Long
     @Query("SELECT n FROM Notification n ORDER BY n.createAt DESC")
     public List<Notification> findAllSortedByDateDesc();
 
-    @Query("SELECT n.id as id, n.message as message, n.createAt as createAt, un.status as status, un.users.id as userId " +
-            "FROM Notification n INNER JOIN UserNotification un ON un.notification = n.id " +
+    @Query("SELECT n.id as id, n.message as message, n.createAt as createAt, un.status as status, un.users.id as userId, " +
+            "n.redirect as redirect FROM Notification n INNER JOIN UserNotification un ON un.notification = n.id " +
             "WHERE un.users = :userId ORDER BY n.createAt DESC")
     List<NotificationDTO> findByUser(User userId);
 

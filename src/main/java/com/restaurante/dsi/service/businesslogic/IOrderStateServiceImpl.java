@@ -20,4 +20,13 @@ public class IOrderStateServiceImpl implements IOrderStateService {
     return orderStatesRepository.findAll();
   }
 
+  @Override
+  public OrderState findById(Long id){
+    return orderStatesRepository.findById(id).orElse(null);
+  }
+
+    @Override
+    public OrderState findByName(String name){
+        return orderStatesRepository.findByName(name);
+    }
 }

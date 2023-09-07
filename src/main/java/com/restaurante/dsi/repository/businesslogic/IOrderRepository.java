@@ -3,6 +3,7 @@ package com.restaurante.dsi.repository.businesslogic;
 import com.restaurante.dsi.model.businesslogic.Order;
 import com.restaurante.dsi.model.notifications.Notification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -14,4 +15,7 @@ import java.util.List;
 public interface IOrderRepository extends JpaRepository<Order, Long> {
     List<Order> findByCreateAtBetweenOrderByCreateAtDesc(LocalDateTime startDate, LocalDateTime endDate);
     List<Order> findAllByOrderByCreateAtDesc();
+    @Query(value = "SELECT insert_inventory_detail_function(?)", nativeQuery = true)
+    void updateInventoryFuntion(Long id);
+
 }

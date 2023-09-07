@@ -6,4 +6,6 @@ import com.restaurante.dsi.model.businesslogic.OrderState;
 
 public interface IOrderStateService {
   public List<OrderState> findAll();
+  public OrderState findById(Long id);
+  public OrderState findByName(String name);
 }

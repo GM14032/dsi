@@ -5,16 +5,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Table(name = "orders")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Entity
-@Setter
-@Getter
+@Entity @Setter @Getter
 @NoArgsConstructor
 public class Order {
     private static final long serialVersionUID = 1L;
@@ -23,7 +19,6 @@ public class Order {
     private Long id;
 
     @Column(name = "number_order")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long numberOrder;
     // TODO: change for a foreign key of categories (desayuno, almuerzo, cena,
     // bebidas, etc)
@@ -40,9 +35,11 @@ public class Order {
     @JsonIgnoreProperties({ "order" })
     private List<OrderDetail> orderDetails;
 
-    // TODO: change for a foreign key of tables
-    @Column(name = "table_number", columnDefinition = "bigint default 0")
-    private Long tableNumber = 0L;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "table_id")
+    @JsonIgnoreProperties({"orders"})
+    private DiningTable table;
 
     private Double total = 0.0;
     @JsonProperty("create_at")
@@ -53,11 +50,11 @@ public class Order {
     private LocalDateTime updateAt;
     @PrePersist
     public void prePersist() {
-        createAt = LocalDateTime.now();
-    }
+        createAt = LocalDateTime.now();}
     @PreUpdate
     public void preUpdate() {
         updateAt = LocalDateTime.now();
     }
+
 
 }
