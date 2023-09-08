@@ -1,8 +1,8 @@
 package com.restaurante.dsi.service.businesslogic;
 
 import com.restaurante.dsi.model.businesslogic.InventoryDetail;
+import com.restaurante.dsi.model.businesslogic.InventoryDetailDto;
 import com.restaurante.dsi.repository.businesslogic.IInventoryDetailRepository;
-import com.restaurante.dsi.repository.businesslogic.IInventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -47,5 +47,9 @@ public class IInventoryDetailServiceImpl implements IInventoryDetailService{
     @Override
     public void delete(Long id) {
         inventoryDetailRepository.deleteById(id);
+    }
+    @Override
+    public List<InventoryDetailDto> getInventoryDetail(Long inventoryId) {
+        return inventoryDetailRepository.getInventoryDetail(inventoryId);
     }
 }

@@ -1,6 +1,8 @@
 package com.restaurante.dsi.service.businesslogic;
 
 import com.restaurante.dsi.model.businesslogic.InventoryDetail;
+import com.restaurante.dsi.model.businesslogic.InventoryDetailDto;
+
 import java.util.List;
 
 public interface IInventoryDetailService {
@@ -10,5 +12,6 @@ public interface IInventoryDetailService {
     List<InventoryDetail> findByInventory(Long id);
     InventoryDetail findById(Long id);
     void delete(Long id);
+    List<InventoryDetailDto> getInventoryDetail(Long inventoryId);
 
 }

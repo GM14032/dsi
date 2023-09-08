@@ -193,6 +193,44 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION get_inventory_details(inventory_id_param BIGINT)
+    RETURNS TABLE (
+                      id BIGINT,
+                      inventoryId BIGINT,
+                      quantity double precision,
+                      price double precision,
+                      ingredientId BIGINT,
+                      ingredientName varchar
+                  ) AS $$
+BEGIN
+    RETURN QUERY
+        SELECT
+            inv_detail.ID,
+            inv_detail.inventory_id as inventoryId,
+            subquery.quantity AS quantity,
+            subquery.price AS price,
+            subquery.ingredient_id AS ingredientId,
+            ingredient.name AS ingredientName
+        FROM Inventory_Detail inv_detail
+                 INNER JOIN (
+            SELECT
+                sub.inventory_id,
+                sub.ingredient_id,
+                SUM(CASE WHEN sub.is_entry THEN sub.quantity ELSE -sub.quantity END) AS quantity,
+                SUM(CASE WHEN sub.is_entry THEN sub.price*sub.quantity ELSE -sub.price*sub.quantity END) / SUM(CASE WHEN sub.is_entry THEN sub.quantity ELSE -sub.quantity END) AS price
+            FROM Inventory_Detail sub
+            WHERE sub.inventory_id = inventory_id_param
+            GROUP BY sub.inventory_id, sub.ingredient_id
+        ) AS subquery
+                            ON inv_detail.inventory_id = subquery.inventory_id
+                                AND inv_detail.ingredient_id = subquery.ingredient_id
+                 INNER JOIN Ingredient ingredient
+                            ON inv_detail.ingredient_id = ingredient.id;
+
+    RETURN;
+END;
+$$ LANGUAGE plpgsql;
+
 -- crear trigger
 
 CREATE TRIGGER user_notification_by_role_insert_trigger

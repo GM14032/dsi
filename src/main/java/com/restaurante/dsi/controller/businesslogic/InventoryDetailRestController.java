@@ -1,6 +1,7 @@
 package com.restaurante.dsi.controller.businesslogic;
 
 import com.restaurante.dsi.model.businesslogic.InventoryDetail;
+import com.restaurante.dsi.model.businesslogic.InventoryDetailDto;
 import com.restaurante.dsi.service.businesslogic.IInventoryDetailService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -37,5 +38,10 @@ public class InventoryDetailRestController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         inventoryDetailService.delete(id);
+    }
+
+    @GetMapping("/total/{idInventory}")
+    public List<InventoryDetailDto> getInventoryDetail(@PathVariable Long idInventory) {
+        return inventoryDetailService.getInventoryDetail(idInventory);
     }
 }
