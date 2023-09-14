@@ -12,17 +12,16 @@ import jakarta.transaction.Transactional;
 @Service("ProductService")
 public class ProductServiceImpl implements IProductService {
 @Autowired
-private IProductRepository iProductRepository;
+private IProductRepository productRepository;
 
 @Override
 public List<Product> findAll() {
-  return iProductRepository.findAll();
+  return productRepository.findAll();
 }
  @Override
   @Transactional
   public Product save(Product product) {
-      return iProductRepository.save(product);
-
+      return productRepository.save(product);
   }
 
   @Override
@@ -35,18 +34,18 @@ public List<Product> findAll() {
             if(product.getPrice()!=null){
                 currentProduct.setPrice(product.getPrice());
             }
-            return iProductRepository.save(currentProduct);
+            return productRepository.save(currentProduct);
 
     }
 
 @Override
 public Product findById(Long id) {
-   return iProductRepository.findById(id).orElse(null)  ;
+   return productRepository.findById(id).orElse(null)  ;
 }
 
 @Override
 public void delete(Long id) {
-iProductRepository.deleteById(id);
+    productRepository.deleteById(id);
 }
 
  

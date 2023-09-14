@@ -1,19 +1,12 @@
 package com.restaurante.dsi.controller.businesslogic;
 
-import com.restaurante.dsi.model.businesslogic.DiningTable;
 import com.restaurante.dsi.model.businesslogic.Order;
 import com.restaurante.dsi.model.businesslogic.OrderState;
 import com.restaurante.dsi.repository.businesslogic.IOrderRepository;
-import com.restaurante.dsi.service.businesslogic.IDiningTableService;
 import com.restaurante.dsi.service.businesslogic.IOrderDetailService;
 import com.restaurante.dsi.service.businesslogic.IOrderService;
 import com.restaurante.dsi.service.businesslogic.IOrderStateService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;

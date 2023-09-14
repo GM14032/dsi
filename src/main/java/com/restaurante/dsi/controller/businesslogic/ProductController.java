@@ -1,23 +1,11 @@
 package com.restaurante.dsi.controller.businesslogic;
 
 import java.util.List;
-
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import com.restaurante.dsi.service.businesslogic.IIngredientDetailService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.restaurante.dsi.model.businesslogic.DiningTable;
+import org.springframework.web.bind.annotation.*;
 import com.restaurante.dsi.model.businesslogic.Product;
 import com.restaurante.dsi.service.businesslogic.IProductService;
 
@@ -30,13 +18,22 @@ public class ProductController {
   @Autowired
   private IProductService productService;
 
+  @Autowired
+  private IIngredientDetailService ingredientDetailService;
+
   @GetMapping({ "/", "" })
  public List<Product> index(){
     return productService.findAll();
  }
-   @PostMapping("/")
-  public Product create(@RequestBody @Valid Product product) {
-    return productService.save(product);
+  @PostMapping({"/",""})
+  public Product create(@RequestBody Product product) {
+    Product newProduct = productService.save(product);
+     product.getIngredientDetails().forEach(ingredientDetail -> {
+          ingredientDetail.setProduct(newProduct);
+          ingredientDetailService.save(ingredientDetail);
+      });
+        newProduct.setIngredientDetails(product.getIngredientDetails());
+    return newProduct;
   }
 
   @PutMapping("/{id}")
