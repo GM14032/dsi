@@ -16,7 +16,6 @@ import java.util.Set;
 @NoArgsConstructor
 
 public class Product {
-  private static final long serialVersionUID = 1L;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -26,6 +25,7 @@ public class Product {
 
   private Double price = 0.0;
   
+  private static final long serialVersionUID = 1L;  
 
   @OneToMany(mappedBy = "product")
   @JsonIgnore

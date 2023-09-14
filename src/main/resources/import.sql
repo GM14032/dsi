@@ -45,13 +45,13 @@ INSERT INTO order_states (id, name, color_hex) VALUES (3, 'Completado', '#008000
 INSERT INTO order_states (id, name, color_hex) VALUES (4, 'Entregado', '#0000FF');
 INSERT INTO order_states (id, name, color_hex) VALUES (5, 'Cancelado', '#808080');
 
-INSERT INTO products (id, name, price) VALUES (1, 'Huevos Revueltos', 5.00);
-INSERT INTO products (id, name, price) VALUES (2, 'Huevos Rancheros', 5.00);
-INSERT INTO products (id, name, price) VALUES (3, 'Huevos con Chorizo', 5.00);
-INSERT INTO products (id, name, price) VALUES (4, 'Huevos con Jamon', 5.00);
-INSERT INTO products (id, name, price) VALUES (5, 'Huevos con Tocino', 5.00);
-INSERT INTO products (id, name, price) VALUES (6, 'Huevos con Salchicha', 5.00);
-INSERT INTO products (id, name, price) VALUES (7, 'Pupusas de Queso', 0.50);
+INSERT INTO products (, name, price) VALUES (, 'Huevos Revueltos', 5.00);
+INSERT INTO products (, name, price) VALUES (, 'Huevos Rancheros', 5.00);
+INSERT INTO products (, name, price) VALUES (, 'Huevos con Chorizo', 5.00);
+INSERT INTO products (, name, price) VALUES (, 'Huevos con Jamon', 5.00);
+INSERT INTO products (, name, price) VALUES (, 'Huevos con Tocino', 5.00);
+INSERT INTO products (, name, price) VALUES (, 'Huevos con Salchicha', 5.00);
+INSERT INTO products (, name, price) VALUES (, 'Pupusas de Queso', 0.50);
 
 INSERT INTO tables ( capacity, description) VALUES (2, 'Mesa numero 2');
 INSERT INTO tables ( capacity, description) VALUES (2, 'Mesa numero 2');
@@ -88,6 +88,7 @@ INSERT INTO ingredient_detail (quantity, ingredient_id, product_id) VALUES (2, 1
 INSERT INTO ingredient_detail (quantity, ingredient_id, product_id) VALUES (1, 10, 6);
 INSERT INTO ingredient_detail (quantity, ingredient_id, product_id) VALUES (2, 11, 7);
 INSERT INTO ingredient_detail (quantity, ingredient_id, product_id) VALUES (1, 12, 7);
+INSERT INTO ingredient_detail (quantity, ingredient_id, product_id) VALUES (1, 11, 8);
 
 INSERT INTO inventory ( is_active,create_at) VALUES (true,now());
 INSERT INTO inventory_detail (quantity, price, is_entry,create_at,ingredient_id, inventory_id) VALUES (100, 0.50, true,now(),1,1);

@@ -4,46 +4,49 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.restaurante.dsi.model.businesslogic.DiningTable;
 import com.restaurante.dsi.model.businesslogic.Product;
-import com.restaurante.dsi.repository.businesslogic.IDiningTableRepository;
 import com.restaurante.dsi.repository.businesslogic.IProductRepository;
-import com.restaurante.dsi.service.businesslogic.IDiningTableService;
 
 import jakarta.transaction.Transactional;
 
 @Service("ProductService")
 public class ProductServiceImpl implements IProductService {
-
+@Autowired
 private IProductRepository iProductRepository;
 
 @Override
 public List<Product> findAll() {
   return iProductRepository.findAll();
 }
+ @Override
+  @Transactional
+  public Product save(Product product) {
+      return iProductRepository.save(product);
 
-@Override
-public Product save(Product product) {
-  // TODO Auto-generated method stub
-  throw new UnsupportedOperationException("Unimplemented method 'save'");
-}
+  }
 
-@Override
-public Product update(Product currentProduct, Product product) {
-  // TODO Auto-generated method stub
-  throw new UnsupportedOperationException("Unimplemented method 'update'");
-}
+  @Override
+    @Transactional
+    public Product update(Product currentProduct, Product product) {
+
+            if(product.getName()!=null){
+                currentProduct.setName(product.getName());
+            }
+            if(product.getPrice()!=null){
+                currentProduct.setPrice(product.getPrice());
+            }
+            return iProductRepository.save(currentProduct);
+
+    }
 
 @Override
 public Product findById(Long id) {
-  // TODO Auto-generated method stub
-  throw new UnsupportedOperationException("Unimplemented method 'findById'");
+   return iProductRepository.findById(id).orElse(null)  ;
 }
 
 @Override
 public void delete(Long id) {
-  // TODO Auto-generated method stub
-  throw new UnsupportedOperationException("Unimplemented method 'delete'");
+iProductRepository.deleteById(id);
 }
 
  
