@@ -1,6 +1,8 @@
 package com.restaurante.dsi.controller.businesslogic;
 
 import java.util.List;
+
+import com.restaurante.dsi.model.businesslogic.IngredientDetail;
 import com.restaurante.dsi.service.businesslogic.IIngredientDetailService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,19 @@ public class ProductController {
   @PutMapping("/{id}")
   public Product update(@PathVariable Long id, @RequestBody Product product) {
        Product cuProduct=productService.findById(id);
+       Product updatedProduct=productService.update(cuProduct,product);
+       if (product.getIngredientDetails()!=null){
+           product.getIngredientDetails().forEach(ingredientDetail -> {
+               ingredientDetail.setProduct(updatedProduct);
+               IngredientDetail updatedIngredient=ingredientDetailService.findById(ingredientDetail.getId());
+                if (updatedIngredient!=null){
+                     ingredientDetailService.update(updatedIngredient,ingredientDetail);
+                }else{
+                    ingredientDetailService.save(ingredientDetail);
+                }
+           });
+           updatedProduct.setIngredientDetails(product.getIngredientDetails());
+       }
     return productService.update(cuProduct,product);
   }
   @GetMapping("/{id}")
