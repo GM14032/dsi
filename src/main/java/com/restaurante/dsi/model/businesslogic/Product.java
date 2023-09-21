@@ -1,20 +1,19 @@
 package com.restaurante.dsi.model.businesslogic;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.util.Set;
+import lombok.*;
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.List;
 
 @Table(name = "products")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity @Setter @Getter
-@NoArgsConstructor
-public class Product {
+@NoArgsConstructor @AllArgsConstructor
+public class Product{
+  private static final long serialVersionUID = 1L;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -22,11 +21,9 @@ public class Product {
   @Column(unique = true)
   private String name;
 
-  private Double price = 0.0;
+  private Double price;
 
-  private static final long serialVersionUID = 1L;
-
-  @OneToMany(mappedBy = "product")
-  @JsonIgnore
-  private Set<IngredientDetail> ingredientDetails;
+  @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @JsonIgnoreProperties({ "product" })
+  private List<IngredientDetail> ingredientDetails;
 }
