@@ -16,6 +16,8 @@ insert into permission (id, name,description,table_name, group_id) values (10, '
 insert into permission (id, name,description,table_name, group_id) values (11, 'READ_TABLE','Este permiso permite al usuario ver o leer información de la tabla mesa','Mesas', 'READ');
 insert into permission (id, name,description,table_name, group_id) values (12, 'WRITE_TABLE','Este permiso permite al usuario crear y eliminar información de la tabla mesa','Mesas', 'WRITE');
 insert into permission (id, name,description,table_name, group_id) values (13, 'WRITE_INVENTARY','Este permiso permite al usuario gestionar la información de inventario','Inventary', 'WRITE');
+insert into permission (id, name,description,table_name, group_id) values (14, 'WRITE_PRODUCT','Este permiso permite al usuario  editar de la tabla Producto','Products', 'WRITE');
+insert into permission (id, name,description,table_name, group_id) values (15, 'READ_PRODUCT','Este permiso permite al usuario ver o leer información de la tabla permiso','Products', 'READ');
 
 insert into permission_role (role_id, permission_id) values (1, 1);
 insert into permission_role (role_id, permission_id) values (1, 2);
@@ -34,6 +36,9 @@ insert into permission_role (role_id, permission_id) values (3, 8);
 insert into permission_role (role_id, permission_id) values (3, 9);
 insert into permission_role (role_id, permission_id) values (1, 11);
 insert into permission_role (role_id, permission_id) values (1, 12);
+insert into permission_role (role_id, permission_id) values (1, 13);
+insert into permission_role (role_id, permission_id) values (1, 14);
+insert into permission_role (role_id, permission_id) values (1, 15);
 
 insert into users(name,last_name,email,phone,username, password, enable, role_id,create_at) values ('Jenniffer','Granados','fiebre.libros@gmail.com','(503) 7714-8798','admin', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 1,now());
 insert into users(name,last_name,email,phone,username, password, enable, role_id,create_at) values ('Ever','Bonilla','test2@gmail.com','(503) 7489-5478','Ever_Bonilla', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 2,now());
