@@ -39,6 +39,8 @@ insert into permission_role (role_id, permission_id) values (1, 12);
 insert into permission_role (role_id, permission_id) values (1, 13);
 insert into permission_role (role_id, permission_id) values (1, 14);
 insert into permission_role (role_id, permission_id) values (1, 15);
+insert into permission_role (role_id, permission_id) values (2, 14);
+insert into permission_role (role_id, permission_id) values (2, 15);
 
 insert into users(name,last_name,email,phone,username, password, enable, role_id,create_at) values ('Jenniffer','Granados','fiebre.libros@gmail.com','(503) 7714-8798','admin', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 1,now());
 insert into users(name,last_name,email,phone,username, password, enable, role_id,create_at) values ('Ever','Bonilla','test2@gmail.com','(503) 7489-5478','Ever_Bonilla', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 2,now());
