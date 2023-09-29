@@ -26,7 +26,7 @@ DO $$BEGIN
         FROM pg_trigger
         WHERE tgname = 'update_table_reserved_trigger'
     ) THEN
-        DROP TRIGGER update_table_reserved_trigger ON tables;
+        DROP TRIGGER update_table_reserved_trigger ON orders;
     END IF;
 END$$;
 DO $$BEGIN
@@ -35,7 +35,7 @@ DO $$BEGIN
         FROM pg_trigger
         WHERE tgname = 'update_table_on_order_completion_trigger'
     ) THEN
-        DROP TRIGGER update_table_on_order_completion_trigger ON tables;
+        DROP TRIGGER update_table_on_order_completion_trigger ON orders;
     END IF;
 END$$;
 DO $$BEGIN
@@ -44,7 +44,7 @@ DO $$BEGIN
         FROM pg_trigger
         WHERE tgname = 'close_inventory_trigger'
     ) THEN
-        DROP TRIGGER close_inventory_trigger ON tables;
+        DROP TRIGGER close_inventory_trigger ON inventory;
     END IF;
 END$$;
 DO $$BEGIN
@@ -53,7 +53,7 @@ DO $$BEGIN
         FROM pg_trigger
         WHERE tgname = 'insert_inventory_detail_trigger'
     ) THEN
-        DROP TRIGGER insert_inventory_detail_trigger ON tables;
+        DROP TRIGGER insert_inventory_detail_trigger ON Inventory;
     END IF;
 END$$;
 DO $$BEGIN
@@ -65,7 +65,15 @@ DO $$BEGIN
         DROP TRIGGER update_before_inventory ON inventory;
     END IF;
 END$$;
-
+DO $$BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM pg_trigger
+        WHERE tgname = 'before_insert_order'
+    ) THEN
+        DROP TRIGGER before_insert_order ON orders;
+    END IF;
+END$$;
 -- Crear la funcion
 
 CREATE OR REPLACE FUNCTION user_notification_by_role_insert_trigger()
