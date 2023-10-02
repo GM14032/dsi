@@ -1,5 +1,6 @@
 package com.restaurante.dsi.controller.businesslogic;
 
+import com.restaurante.dsi.model.businesslogic.Invoice;
 import com.restaurante.dsi.model.businesslogic.Order;
 import com.restaurante.dsi.model.businesslogic.OrderState;
 import com.restaurante.dsi.repository.businesslogic.IOrderRepository;
@@ -67,5 +68,14 @@ public class OrderRestController {
             } else {
                 return ResponseEntity.notFound().build();
             }
+    }
+    @PostMapping("/invoice")
+    public ResponseEntity<String> sendInvoice(@RequestBody Invoice invoice) {
+        try {
+            orderService.sendInvoice(invoice.getPdf(), invoice.getEmail());
+            return ResponseEntity.ok("Factura enviada.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error al enviar la factura."+e.getMessage());
+        }
     }
 }
