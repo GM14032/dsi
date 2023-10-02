@@ -9,4 +9,5 @@ public interface IIngredientDetailService {
     public IngredientDetail save(IngredientDetail ingredientDetail);
     public IngredientDetail update(IngredientDetail currentIngredientDetail, IngredientDetail ingredientDetail);
     public IngredientDetail findById(Long id);
+    public void delete(Long id);
 }

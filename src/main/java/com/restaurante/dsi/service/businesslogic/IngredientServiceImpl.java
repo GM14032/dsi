@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class IIngredientServiceImpl implements IIngredientService{
+public class IngredientServiceImpl implements IIngredientService{
     @Autowired
     private IIngredientRepository ingredientRepository;
     @Override

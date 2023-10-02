@@ -4,11 +4,12 @@ import com.restaurante.dsi.model.businesslogic.IngredientDetail;
 import com.restaurante.dsi.repository.businesslogic.IIngredientDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-public class IIngredientDetailServiceImpl implements IIngredientDetailService{
+public class IngredientDetailServiceImpl implements IIngredientDetailService{
     @Autowired
     private IIngredientDetailRepository ingredientDetailRepository;
 
@@ -40,5 +41,12 @@ public class IIngredientDetailServiceImpl implements IIngredientDetailService{
     @Override
     public IngredientDetail findById(Long id) {
         return ingredientDetailRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+            ingredientDetailRepository.deleteById(id);
+
     }
 }

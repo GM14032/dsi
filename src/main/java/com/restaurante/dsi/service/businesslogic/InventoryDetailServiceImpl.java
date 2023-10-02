@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class IInventoryDetailServiceImpl implements IInventoryDetailService{
+public class InventoryDetailServiceImpl implements IInventoryDetailService{
     @Autowired
     private IInventoryDetailRepository inventoryDetailRepository;
     @Override
