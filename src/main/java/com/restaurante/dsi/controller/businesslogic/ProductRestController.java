@@ -1,6 +1,7 @@
 package com.restaurante.dsi.controller.businesslogic;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.restaurante.dsi.model.businesslogic.IngredientDetail;
 import com.restaurante.dsi.service.businesslogic.IIngredientDetailService;
@@ -15,7 +16,7 @@ import com.restaurante.dsi.service.businesslogic.IProductService;
 @RestController
 @RequestMapping("/api/products")
 @Tag(name = "Productos", description = "Endpoints para los productos")
-public class ProductController {
+public class ProductRestController {
 
   @Autowired
   private IProductService productService;
@@ -40,20 +41,29 @@ public class ProductController {
 
   @PutMapping("/{id}")
   public Product update(@PathVariable Long id, @RequestBody Product product) {
-       Product cuProduct=productService.findById(id);
-       Product updatedProduct=productService.update(cuProduct,product);
+      Product cuProduct=productService.findById(id);
        if (product.getIngredientDetails()!=null){
            product.getIngredientDetails().forEach(ingredientDetail -> {
-               ingredientDetail.setProduct(updatedProduct);
-               IngredientDetail updatedIngredient=ingredientDetailService.findById(ingredientDetail.getId());
-                if (updatedIngredient!=null){
-                     ingredientDetailService.update(updatedIngredient,ingredientDetail);
+               ingredientDetail.setProduct(cuProduct);
+                if (ingredientDetail.getId()!=null){
+                    IngredientDetail updatedIngredient=ingredientDetailService.findById(ingredientDetail.getId());
+                    ingredientDetailService.update(updatedIngredient,ingredientDetail);
                 }else{
                     ingredientDetailService.save(ingredientDetail);
                 }
            });
-           updatedProduct.setIngredientDetails(product.getIngredientDetails());
+
+           List<IngredientDetail> ingredientDetailsToRemove = cuProduct.getIngredientDetails().stream()
+                   .filter(ids -> !product.getIngredientDetails().stream()
+                           .anyMatch(ids2 -> ids2.getId().equals(ids.getId())))
+                   .collect(Collectors.toList());
+
+           cuProduct.getIngredientDetails().removeAll(ingredientDetailsToRemove);
+           for (IngredientDetail ingredientDetail : ingredientDetailsToRemove) {
+               ingredientDetailService.delete(ingredientDetail.getId());
+           }
        }
+
     return productService.update(cuProduct,product);
   }
   @GetMapping("/{id}")
