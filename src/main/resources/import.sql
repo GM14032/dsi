@@ -51,6 +51,7 @@ INSERT INTO order_states (id, name, color_hex) VALUES (2, 'Preparando', '#FFA500
 INSERT INTO order_states (id, name, color_hex) VALUES (3, 'Completado', '#008000');
 INSERT INTO order_states (id, name, color_hex) VALUES (4, 'Entregado', '#0000FF');
 INSERT INTO order_states (id, name, color_hex) VALUES (5, 'Cancelado', '#808080');
+INSERT INTO order_states (id, name, color_hex) VALUES (6, 'Pagado', '#0000FF');
 
 INSERT INTO products ( name, price) VALUES ( 'Huevos Revueltos', 5.00);
 INSERT INTO products ( name, price) VALUES ( 'Huevos Rancheros', 5.00);
