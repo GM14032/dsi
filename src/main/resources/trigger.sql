@@ -125,14 +125,8 @@ $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION update_table_on_order_completion_trigger()
     RETURNS TRIGGER AS $$
-DECLARE
-    state INT;
 BEGIN
-
-    SELECT id INTO state FROM order_states WHERE name = 'Completado';
-
-    IF NEW.state_id = state THEN
-
+    IF NEW.state_id IN (SELECT id FROM order_states WHERE name IN ('Pagado', 'Cancelado')) THEN
         UPDATE tables
         SET available = true
         WHERE id = NEW.table_id;
@@ -140,6 +134,7 @@ BEGIN
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
 
 CREATE OR REPLACE FUNCTION close_inventory_trigger()
     RETURNS TRIGGER AS $$
