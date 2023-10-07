@@ -26,4 +26,9 @@ public class Product{
   @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JsonIgnoreProperties({ "product" })
   private List<IngredientDetail> ingredientDetails;
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "category_id")
+  @JsonIgnoreProperties({"products"})
+  private Category category;
 }
