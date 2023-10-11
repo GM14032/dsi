@@ -55,6 +55,9 @@ INSERT INTO order_states (id, name, color_hex) VALUES (6, 'Pagado', '#213487');
 insert into Category (name) values ('Desayuno');
 insert into Category (name) values ('Almuerzo');
 insert into Category (name) values ('Cena');
+insert into Category (name) values ('Bebidas');
+insert into Category (name) values ('Postres');
+insert into Category (name) values ('Entradas');
 
 INSERT INTO products ( name, price,category_id) VALUES ( 'Huevos Revueltos', 5.00,1);
 INSERT INTO products ( name, price,category_id) VALUES ( 'Huevos Rancheros', 5.00,1);
