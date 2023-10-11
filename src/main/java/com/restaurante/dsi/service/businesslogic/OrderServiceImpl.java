@@ -47,9 +47,6 @@ public class OrderServiceImpl implements IOrderService {
         if (order.getQuantity() != null) {
             currentOrder.setQuantity(order.getQuantity());
         }
-        if (order.getCategory() != null) {
-            currentOrder.setCategory(order.getCategory());
-        }
         if (order.getDescription() != null) {
             currentOrder.setDescription(order.getDescription());
         }
