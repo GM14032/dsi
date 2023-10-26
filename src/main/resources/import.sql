@@ -29,18 +29,17 @@ insert into permission_role (role_id, permission_id) values (1, 7);
 insert into permission_role (role_id, permission_id) values (1, 8);
 insert into permission_role (role_id, permission_id) values (1, 9);
 insert into permission_role (role_id, permission_id) values (1, 10);
-insert into permission_role (role_id, permission_id) values (1, 13);
-insert into permission_role (role_id, permission_id) values (2, 8);
-insert into permission_role (role_id, permission_id) values (2, 9);
-insert into permission_role (role_id, permission_id) values (3, 8);
-insert into permission_role (role_id, permission_id) values (3, 9);
 insert into permission_role (role_id, permission_id) values (1, 11);
 insert into permission_role (role_id, permission_id) values (1, 12);
 insert into permission_role (role_id, permission_id) values (1, 13);
 insert into permission_role (role_id, permission_id) values (1, 14);
 insert into permission_role (role_id, permission_id) values (1, 15);
+insert into permission_role (role_id, permission_id) values (2, 8);
+insert into permission_role (role_id, permission_id) values (2, 9);
 insert into permission_role (role_id, permission_id) values (2, 14);
 insert into permission_role (role_id, permission_id) values (2, 15);
+insert into permission_role (role_id, permission_id) values (3, 8);
+insert into permission_role (role_id, permission_id) values (3, 9);
 
 insert into users(name,last_name,email,phone,username, password, enable, role_id,create_at) values ('Jenniffer','Granados','fiebre.libros@gmail.com','(503) 7714-8798','admin', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 1,now());
 insert into users(name,last_name,email,phone,username, password, enable, role_id,create_at) values ('Ever','Bonilla','test2@gmail.com','(503) 7489-5478','Ever_Bonilla', '$2a$10$eGW9WJuDbUeEfAa060zptusUKtUWZIlra/SBBAG3hfR3Hfn1Y1Age', true, 2,now());
@@ -51,14 +50,22 @@ INSERT INTO order_states (id, name, color_hex) VALUES (2, 'Preparando', '#FFA500
 INSERT INTO order_states (id, name, color_hex) VALUES (3, 'Completado', '#008000');
 INSERT INTO order_states (id, name, color_hex) VALUES (4, 'Entregado', '#0000FF');
 INSERT INTO order_states (id, name, color_hex) VALUES (5, 'Cancelado', '#808080');
+INSERT INTO order_states (id, name, color_hex) VALUES (6, 'Pagado', '#213487');
 
-INSERT INTO products ( name, price) VALUES ( 'Huevos Revueltos', 5.00);
-INSERT INTO products ( name, price) VALUES ( 'Huevos Rancheros', 5.00);
-INSERT INTO products ( name, price) VALUES ( 'Huevos con Chorizo', 5.00);
-INSERT INTO products ( name, price) VALUES ( 'Huevos con Jamon', 5.00);
-INSERT INTO products ( name, price) VALUES ( 'Huevos con Tocino', 5.00);
-INSERT INTO products ( name, price) VALUES ( 'Huevos con Salchicha', 5.00);
-INSERT INTO products ( name, price) VALUES ( 'Pupusas de Queso', 0.50);
+insert into Category (name) values ('Desayuno');
+insert into Category (name) values ('Almuerzo');
+insert into Category (name) values ('Cena');
+insert into Category (name) values ('Bebidas');
+insert into Category (name) values ('Postres');
+insert into Category (name) values ('Entradas');
+
+INSERT INTO products ( name, price,category_id) VALUES ( 'Huevos Revueltos', 5.00,1);
+INSERT INTO products ( name, price,category_id) VALUES ( 'Huevos Rancheros', 5.00,1);
+INSERT INTO products ( name, price,category_id) VALUES ( 'Huevos con Chorizo', 5.00,1);
+INSERT INTO products ( name, price,category_id) VALUES ( 'Huevos con Jamon', 5.00,1);
+INSERT INTO products ( name, price,category_id) VALUES ( 'Huevos con Tocino', 5.00,1);
+INSERT INTO products ( name, price,category_id) VALUES ( 'Huevos con Salchicha', 5.00,1);
+INSERT INTO products ( name, price,category_id) VALUES ( 'Pupusas de Queso', 0.50,1);
 
 INSERT INTO tables ( capacity, description) VALUES (2, 'Mesa numero 2');
 INSERT INTO tables ( capacity, description) VALUES (2, 'Mesa numero 2');
