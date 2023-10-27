@@ -83,7 +83,7 @@ insert into orders (create_at, description, number_order, quantity, total, state
 insert into orders (create_at, description, number_order, quantity, total, state_id, table_id)values ('2023-09-03 23:18:09.354146','Orden  01 del mes 09',1,3,20.15,6,1);
 insert into orders (create_at, description, number_order, quantity, total, state_id, table_id)values ('2023-09-15 23:18:09.354146','Orden 02 del mes 09',2,3,26.48,6,1);
 insert into orders (create_at, description, number_order, quantity, total, state_id, table_id)values ('2023-09-26 23:18:09.354146','Orden 03 del mes 09',3,3,16.5,6,1);
-insert into orders (create_at, description, number_order, quantity, total, state_id, table_id)values ('2023-10-01 23:18:09.354146','Orden 01 del mes 10',1,3,47.25.,6,1);
+insert into orders (create_at, description, number_order, quantity, total, state_id, table_id)values ('2023-10-01 23:18:09.354146','Orden 01 del mes 10',1,3,47.25,6,1);
 
 
 INSERT INTO ingredient (min_stock,name, is_countable,create_at) VALUES (10,'Huevos', true,now());

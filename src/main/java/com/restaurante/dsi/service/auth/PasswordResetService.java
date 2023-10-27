@@ -27,6 +27,6 @@ public class PasswordResetService {
         String subject = "Restablecer tu contraseña";
         String body = "Haga clic en el enlace para restablecer su contraseña:\n" + resetUrl;
 
-        emailService.sendEmail(user.getEmail(), subject, body,name,null);
+        emailService.sendEmail(user.getEmail(), subject, body,name,null,null);
     }
 }

@@ -1,7 +1,4 @@
 package com.restaurante.dsi.model.businesslogic;
-import javax.persistence.Column;
-import javax.persistence.ColumnResult;
-import java.time.LocalDate;
 
 public interface InventoryDetailDto {
     Long getId();
@@ -9,7 +6,7 @@ public interface InventoryDetailDto {
     Long getInventoryId();
     Double getQuantity();
     Double getPrice();
-
+    Integer getMinStock();
     Long getIngredientId();
    String getIngredientName();
 
