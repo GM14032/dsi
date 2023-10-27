@@ -2,6 +2,7 @@ package com.restaurante.dsi.controller.businesslogic;
 
 import com.restaurante.dsi.model.businesslogic.Invoice;
 import com.restaurante.dsi.model.businesslogic.Order;
+import com.restaurante.dsi.model.businesslogic.OrderDto;
 import com.restaurante.dsi.model.businesslogic.OrderState;
 import com.restaurante.dsi.repository.businesslogic.IOrderRepository;
 import com.restaurante.dsi.service.businesslogic.IOrderDetailService;
@@ -43,10 +44,13 @@ public class OrderRestController {
     public Order register(@RequestBody Order order) {
         Order newOrder = orderService.save(order);
         OrderState orderState = orderStateService.findByName("Pendiente");
+        Integer quantity = order.getOrderDetails().size();
+        Double[] total = {0.0};
         // save each order detail
         order.getOrderDetails().forEach(orderDetail -> {
             orderDetail.setOrder(newOrder);
             orderDetailService.save(orderDetail);
+            total[0] +=orderDetail.getTotal();
         });
         newOrder.setOrderDetails(order.getOrderDetails());
         newOrder.setState(orderState);
@@ -77,5 +81,9 @@ public class OrderRestController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error al enviar la factura."+e.getMessage());
         }
+    }
+    @GetMapping("/orders-by-month")
+    public List<OrderDto> getOrdersByMonth() {
+        return orderService.getOrdersByMonth();
     }
 }

@@ -1,6 +1,7 @@
 package com.restaurante.dsi.service.businesslogic;
 
 import com.restaurante.dsi.model.businesslogic.Order;
+import com.restaurante.dsi.model.businesslogic.OrderDto;
 import com.restaurante.dsi.repository.businesslogic.IOrderRepository;
 import com.restaurante.dsi.service.auth.EmailService;
 import jakarta.mail.MessagingException;
@@ -66,5 +67,9 @@ public class OrderServiceImpl implements IOrderService {
         String subject = "Factura";
         String body = "Haga clic en el archivo para descargar tu factura";
         emailService.sendEmail(email, subject, body, name, pdfBytes);
+    }
+    @Override
+    public List<OrderDto> getOrdersByMonth() {
+        return orderRepository.getOrdersByMonth();
     }
 }

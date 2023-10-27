@@ -7,10 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.restaurante.dsi.model.businesslogic.OrderState;
 import com.restaurante.dsi.repository.businesslogic.IOrderStateRepository;
-import com.restaurante.dsi.service.businesslogic.IOrderStateService;
 
 @Service
-public class IOrderStateServiceImpl implements IOrderStateService {
+public class OrderStateServiceImpl implements IOrderStateService {
 
   @Autowired
   private IOrderStateRepository orderStatesRepository;
