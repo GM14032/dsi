@@ -35,6 +35,9 @@ public class IngredientServiceImpl implements IIngredientService{
         if (ingredient.getUnit() != null) {
             currentIngredient.setUnit(ingredient.getUnit());
         }
+        if (ingredient.getMinStock() != null) {
+            currentIngredient.setMinStock(ingredient.getMinStock());
+        }
         return ingredientRepository.save(currentIngredient);
     }
 

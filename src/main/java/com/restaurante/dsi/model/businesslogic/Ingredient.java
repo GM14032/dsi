@@ -19,6 +19,7 @@ public class Ingredient {
     private Boolean isCountable;
     private String description;
     private String unit;
+    private Integer minStock;
 
     @Column(name = "create_at")
     private LocalDateTime createAt;

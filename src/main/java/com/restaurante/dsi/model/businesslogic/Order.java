@@ -39,6 +39,7 @@ public class Order {
     private DiningTable table;
 
     private Double total = 0.0;
+
     @JsonProperty("create_at")
     @Column(name = "create_at")
     private LocalDateTime createAt;

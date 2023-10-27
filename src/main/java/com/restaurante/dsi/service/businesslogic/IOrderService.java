@@ -1,6 +1,7 @@
 package com.restaurante.dsi.service.businesslogic;
 
 import com.restaurante.dsi.model.businesslogic.Order;
+import com.restaurante.dsi.model.businesslogic.OrderDto;
 import jakarta.mail.MessagingException;
 
 import java.text.ParseException;
@@ -15,4 +16,5 @@ public interface IOrderService {
     Order update(Order currentOrder,Order order);
     Order findById(Long id);
     void sendInvoice(byte[] pdfBytes, String email) throws MessagingException;
+    List<OrderDto> getOrdersByMonth();
 }
