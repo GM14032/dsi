@@ -95,6 +95,9 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
       throw new EntityNotFoundException("Object with id " + id + " not found");
     }
   }
-
+  @Override
+    public List<User> findByRole(String role) {
+        return usersRepository.findByRole(role);
+    }
 
 }
