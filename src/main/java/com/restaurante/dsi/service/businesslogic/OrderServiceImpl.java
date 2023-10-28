@@ -66,7 +66,7 @@ public class OrderServiceImpl implements IOrderService {
         String name = "Restaurante DSI";
         String subject = "Factura";
         String body = "Haga clic en el archivo para descargar tu factura";
-        emailService.sendEmail(email, subject, body, name, pdfBytes,"Factura_DSI_Restaurant.pdf");
+        emailService.sendEmail(email, subject, body, name, pdfBytes,"Factura_DSI_Restaurant.pdf",null);
     }
     @Override
     public List<OrderDto> getOrdersByMonth() {

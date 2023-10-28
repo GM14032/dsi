@@ -55,9 +55,14 @@ public class UserRestController {
     return userService.findAll();
   }
 
+  //@GetMapping("/role")
+  //@PreAuthorize("hasPermission(#user, 'READ_USER')")
+ // public List<User> testAdmin() {
+   // return userService.findAll();
+//}
+
   @GetMapping("/role")
-  @PreAuthorize("hasPermission(#user, 'READ_USER')")
-  public List<User> testAdmin() {
-    return userService.findAll();
-  }
+    public List<User> findByRole(@RequestParam String role) {
+        return userService.findByRole(role);
+    }
 }

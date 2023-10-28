@@ -10,6 +10,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 @Service
 public class EmailService {
@@ -19,8 +20,12 @@ public class EmailService {
     public EmailService(JavaMailSender mailSender) {
         this.mailSender = mailSender;
     }
+    public void sendEmail(String to, String subject, String body, String name) throws MessagingException {
+        sendEmail(to, subject, body, name, null, null, null);
+    }
 
-    public void sendEmail(String to, String subject, String body,String name,byte[] pdfBytes,String pdfName) throws MessagingException {
+
+    public void sendEmail(String to, String subject, String body,String name,byte[] pdfBytes,String pdfName,String[] cc) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setTo(to);
@@ -28,6 +33,9 @@ public class EmailService {
             helper.setFrom(new InternetAddress(to, MimeUtility.encodeText(name, "UTF-8", "B")));
         } catch (UnsupportedEncodingException e) {
             helper.setFrom(new InternetAddress(to));
+        }
+        if (cc != null && cc.length > 0){
+            helper.setCc(cc);
         }
         helper.setSubject(subject);
         helper.setText(body, true);

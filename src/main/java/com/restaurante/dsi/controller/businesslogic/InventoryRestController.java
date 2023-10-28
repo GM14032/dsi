@@ -1,9 +1,11 @@
 package com.restaurante.dsi.controller.businesslogic;
 
 import com.itextpdf.text.DocumentException;
+import com.restaurante.dsi.model.auth.User;
 import com.restaurante.dsi.model.businesslogic.Inventory;
 import com.restaurante.dsi.model.businesslogic.InventoryDetailDto;
 import com.restaurante.dsi.model.businesslogic.InventoryDto;
+import com.restaurante.dsi.service.auth.IUserService;
 import com.restaurante.dsi.service.businesslogic.IInventoryDetailService;
 import com.restaurante.dsi.service.businesslogic.IInventoryService;
 import com.restaurante.dsi.utils.PdfGenerator;
@@ -26,6 +28,8 @@ public class InventoryRestController {
     private IInventoryService inventoryService;
     @Autowired
     private IInventoryDetailService inventoryDetailService;
+    @Autowired
+    private IUserService usuarioService;
     @GetMapping({ "/", "" })
     public List<Inventory> getAll(@RequestParam(required = false) Boolean active) {
         return inventoryService.findAll(active);
@@ -57,7 +61,7 @@ public class InventoryRestController {
                     } catch (IOException | DocumentException e) {
                  e.printStackTrace();
         }
-
-        inventoryService.sendInventoryReport(pdfBytes,"fiebre.libros@gmail.com");
+        List<User> users= usuarioService.findByRole("Admin");
+        inventoryService.sendInventoryReport(pdfBytes,users);
     }
 }
