@@ -26,7 +26,7 @@ DO $$BEGIN
         FROM pg_trigger
         WHERE tgname = 'update_table_reserved_trigger'
     ) THEN
-        DROP TRIGGER update_table_reserved_trigger ON tables;
+        DROP TRIGGER update_table_reserved_trigger ON orders;
     END IF;
 END$$;
 DO $$BEGIN
@@ -35,7 +35,7 @@ DO $$BEGIN
         FROM pg_trigger
         WHERE tgname = 'update_table_on_order_completion_trigger'
     ) THEN
-        DROP TRIGGER update_table_on_order_completion_trigger ON tables;
+        DROP TRIGGER update_table_on_order_completion_trigger ON orders;
     END IF;
 END$$;
 DO $$BEGIN
@@ -44,7 +44,7 @@ DO $$BEGIN
         FROM pg_trigger
         WHERE tgname = 'close_inventory_trigger'
     ) THEN
-        DROP TRIGGER close_inventory_trigger ON tables;
+        DROP TRIGGER close_inventory_trigger ON inventory;
     END IF;
 END$$;
 DO $$BEGIN
@@ -53,7 +53,7 @@ DO $$BEGIN
         FROM pg_trigger
         WHERE tgname = 'insert_inventory_detail_trigger'
     ) THEN
-        DROP TRIGGER insert_inventory_detail_trigger ON tables;
+        DROP TRIGGER insert_inventory_detail_trigger ON Inventory;
     END IF;
 END$$;
 DO $$BEGIN
@@ -65,7 +65,24 @@ DO $$BEGIN
         DROP TRIGGER update_before_inventory ON inventory;
     END IF;
 END$$;
+DO $$BEGIN
+    IF EXISTS (SELECT 1 FROM pg_proc WHERE proname = 'get_inventory_details') THEN
+        DROP FUNCTION get_inventory_details(bigint);
+    END IF;
 
+    IF EXISTS (SELECT 1 FROM pg_proc WHERE proname = 'checkinventory') THEN
+        DROP FUNCTION checkinventory();
+    END IF;
+END$$;
+DO $$BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM pg_trigger
+        WHERE tgname = 'before_insert_order'
+    ) THEN
+        DROP TRIGGER before_insert_order ON orders;
+    END IF;
+END$$;
 -- Crear la funcion
 
 CREATE OR REPLACE FUNCTION user_notification_by_role_insert_trigger()
@@ -117,14 +134,8 @@ $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION update_table_on_order_completion_trigger()
     RETURNS TRIGGER AS $$
-DECLARE
-    state INT;
 BEGIN
-
-    SELECT id INTO state FROM order_states WHERE name = 'Completado';
-
-    IF NEW.state_id = state THEN
-
+    IF NEW.state_id IN (SELECT id FROM order_states WHERE name IN ('Pagado', 'Cancelado')) THEN
         UPDATE tables
         SET available = true
         WHERE id = NEW.table_id;
@@ -132,6 +143,7 @@ BEGIN
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
 
 CREATE OR REPLACE FUNCTION close_inventory_trigger()
     RETURNS TRIGGER AS $$
@@ -200,7 +212,8 @@ CREATE OR REPLACE FUNCTION get_inventory_details(inventory_id_param BIGINT)
                       quantity double precision,
                       price double precision,
                       ingredientId BIGINT,
-                      ingredientName varchar
+                      ingredientName varchar,
+                      minStock Integer
                   ) AS $$
 BEGIN
     RETURN QUERY
@@ -210,7 +223,8 @@ BEGIN
             subquery.quantity AS quantity,
             subquery.price AS price,
             subquery.ingredient_id AS ingredientId,
-            ingredient.name AS ingredientName
+            ingredient.name AS ingredientName,
+            ingredient.min_stock AS minStock
         FROM Inventory_Detail inv_detail
                  INNER JOIN (
             SELECT
@@ -230,6 +244,37 @@ BEGIN
     RETURN;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE FUNCTION CheckInventory()
+    RETURNS TABLE (
+                      id BIGINT,
+                      name VARCHAR(255),
+                      minStock INT,
+                      availableQuantity DOUBLE PRECISION
+                  ) AS
+$$
+BEGIN
+    RETURN QUERY
+        SELECT
+            i.id,
+            i.name,
+            i.min_stock AS minStock,
+            SUM(CASE WHEN subquery.is_entry THEN subquery.sum_q ELSE -subquery.sum_q END) as availableQuantity
+        FROM (
+                 SELECT
+                     is_entry,
+                     ingredient_id,
+                     SUM(quantity) as sum_q
+                 FROM Inventory_Detail
+                 WHERE inventory_id = (SELECT inventory_id FROM Inventory WHERE is_active = true)
+                 GROUP BY is_entry, ingredient_id
+             ) AS subquery
+                 INNER JOIN ingredient i ON subquery.ingredient_id = i.id
+        GROUP BY i.id, i.name, i.min_stock
+        HAVING SUM(CASE WHEN subquery.is_entry THEN subquery.sum_q ELSE -subquery.sum_q END) < i.min_stock;
+END;
+$$
+    LANGUAGE 'plpgsql';
 
 -- crear trigger
 

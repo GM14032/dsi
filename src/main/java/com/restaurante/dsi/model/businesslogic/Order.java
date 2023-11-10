@@ -20,9 +20,6 @@ public class Order {
 
     @Column(name = "number_order")
     private Long numberOrder;
-    // TODO: change for a foreign key of categories (desayuno, almuerzo, cena,
-    // bebidas, etc)
-    private String category;
 
     private Integer quantity;
     private String description;
@@ -42,6 +39,7 @@ public class Order {
     private DiningTable table;
 
     private Double total = 0.0;
+
     @JsonProperty("create_at")
     @Column(name = "create_at")
     private LocalDateTime createAt;

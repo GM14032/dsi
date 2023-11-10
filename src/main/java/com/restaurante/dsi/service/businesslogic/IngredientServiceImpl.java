@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class IIngredientServiceImpl implements IIngredientService{
+public class IngredientServiceImpl implements IIngredientService{
     @Autowired
     private IIngredientRepository ingredientRepository;
     @Override
@@ -34,6 +34,9 @@ public class IIngredientServiceImpl implements IIngredientService{
         }
         if (ingredient.getUnit() != null) {
             currentIngredient.setUnit(ingredient.getUnit());
+        }
+        if (ingredient.getMinStock() != null) {
+            currentIngredient.setMinStock(ingredient.getMinStock());
         }
         return ingredientRepository.save(currentIngredient);
     }
